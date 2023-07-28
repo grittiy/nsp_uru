@@ -1,4 +1,4 @@
-
+'use client'
 type AlertPeops = {
     children: React.ReactNode
 }
