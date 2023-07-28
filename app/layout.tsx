@@ -2,7 +2,7 @@
 import { Mali } from 'next/font/google'
 import './globals.css'
 import type { Metadata } from 'next'
-import Providers from './components/Providers'
+
 import Appbar from './components/Appbar'
 
 
@@ -16,7 +16,7 @@ export const metadata: Metadata  = {
 
 
 
-export default function RootLayout({
+export default function Providers({
   children,
 }: {
   children: React.ReactNode
@@ -25,10 +25,10 @@ export default function RootLayout({
     <>
     <html lang="en">
       <body className={mail.className}>
-        <Providers>
+        
           <Appbar/>
           {children}
-          </Providers>
+        
         </body>
     </html>
     </>
