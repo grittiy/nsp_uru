@@ -69,12 +69,12 @@ export const authOptions: NextAuthOptions={
     }
     }),
     LineProvider({
-      clientId: process.env.LINE_CLIENT_ID ?? "",
-      clientSecret: process.env.LINE_CLIENT_SECRET ?? "",
+      clientId: process.env.LINE_CLIENT_ID || '',
+      clientSecret: process.env.LINE_CLIENT_SECRET || '',
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
+      clientId: process.env.GOOGLE_CLIENT_ID || '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
     }),
   ],
   secret: process.env.NEXTAUTH_SECRETC,
