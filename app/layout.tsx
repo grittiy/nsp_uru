@@ -1,4 +1,4 @@
-"use client" 
+'use client'
 import { Mali } from 'next/font/google'
 import './globals.css'
 import type { Metadata } from 'next'
