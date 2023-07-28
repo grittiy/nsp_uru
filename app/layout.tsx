@@ -16,7 +16,7 @@ export const metadata: Metadata  = {
 
 
 
-export default function RootLayout({
+export default function ExampleClientComponent({
   children,
 }: {
   children: React.ReactNode
