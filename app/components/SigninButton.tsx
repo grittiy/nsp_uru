@@ -15,9 +15,14 @@ const SigninButton = () => {
 )
     }
     return (
-       <button onClick={() => signIn()} className="text-green-600 ml-auto">
-        Sign In
+        <>
+       <button onClick={() => signIn("google")} className="text-green-600 ml-auto">
+        Sign In Google
        </button>
+       <button onClick={() => signIn("line")} className="text-green-600 ml-auto">
+        Sign In Line
+       </button>
+        </>
     )
 }
 
