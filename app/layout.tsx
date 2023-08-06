@@ -1,4 +1,4 @@
-'use client'
+
 import { Mali } from 'next/font/google'
 import './globals.css'
 import Providers from './components/Providers'
