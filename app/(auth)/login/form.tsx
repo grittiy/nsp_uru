@@ -1,14 +1,15 @@
 'use client'
 import { AiFillLock } from 'react-icons/ai';
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Alert } from "../../components/ui/alert"
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import { useRouter, useSearchParams } from 'next/navigation'
 import { FaRegEnvelope } from 'react-icons/fa';
 import Link from 'next/link';
 
 export const LoginForm = () => {
     const router = useRouter()
+    const {data} = useSession()
     const searchParams = useSearchParams();
     const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
     // const error = searchParams.get('error') ? 'Invalid credentials' : ''
@@ -16,6 +17,22 @@ export const LoginForm = () => {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
 
+    useEffect(() => {
+        //code 
+        if (data && data.user) {
+            if (data.user.role === 'ADMIN') {
+                router.push('/admin')
+            } else if (data.user.role === 'DIRECTOR') {
+                router.push('/driector')
+            } else if (data.user.role === 'EMPLOYEE') {
+                router.push('/employee')
+            } else if (data.user.role === 'USER') {
+                router.push('/user')
+            }
+        }
+    }, [data, router])
+
+    console.log('data',data)
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         try {

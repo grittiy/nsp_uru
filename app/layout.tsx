@@ -3,6 +3,9 @@ import { Mali } from 'next/font/google'
 import './globals.css'
 import Providers from './components/Providers'
 import Appbar from './components/Appbar'
+import { ReactNode } from 'react'
+
+
 
 
 
@@ -13,21 +16,28 @@ export const metadata = {
   description: 'Northern Science Park URU',
 }
 
-
+interface LayoutProps {
+  children: ReactNode;
+  userRole: 'ADMIN' | 'DIRECTOR' | 'EMPLOYEE' | 'USER';
+}
 
 export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+  children, userRole
+}:LayoutProps ) {
   return (
+
     <html lang="en">
       <body className={mail.className}>
-        <Providers>
-          <Appbar />
+
+        <Providers> 
+        <Appbar userRole={userRole}/>
+
           {children}
+         
+          
         </Providers>
       </body>
     </html>
+
   )
 }

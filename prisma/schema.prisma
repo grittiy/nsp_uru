@@ -10,13 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserRole {
+  ADMIN
+  USER
+}
+
 model User {
   id           String        @id @default(uuid()) @unique 
   usr          String        @default(dbgenerated("CONCAT('usr', LPAD(FLOOR(RAND() * 10000000000), 7, '0'))"))
   name         String?
-  email        String?       @unique
-  avatar       String?       @unique
+  email        String       @unique
+  avatar       String?    
   password     String
+  role         UserRole      @default(USER)
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 }
