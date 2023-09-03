@@ -4,7 +4,7 @@ import Layout from '../layout';
 
 const AdminPage: React.FC = () => {
   return (
-    <Layout role="ADMIN">
+    <Layout userRole="ADMIN">
       <h1>หน้าแอดมิน</h1>
     </Layout>
   );
