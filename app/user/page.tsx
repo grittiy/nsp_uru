@@ -1,4 +1,4 @@
-'use client'
+
 import { useEffect, useState } from "react";
 import Layout from "../layout";
 import dynamic from "next/dynamic";
