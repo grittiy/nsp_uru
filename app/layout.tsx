@@ -5,10 +5,6 @@ import Providers from './components/Providers'
 import Appbar from './components/Appbar'
 import { ReactNode } from 'react'
 
-
-
-
-
 const mail = Mali({ subsets: ['latin'], weight: '200' })
 
 export const metadata = {
