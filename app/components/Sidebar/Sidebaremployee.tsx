@@ -15,7 +15,7 @@ const prompt = Mali({
     subsets: ["latin"],
   });
 
-const Sidebar = [{ title: "ผู้เข้าใช้ระบบ", Link: "./employee" },
+const Sidebar = [{ title: "ผู้เข้าใช้ระบบ", Link: "./employee/user" },
 { title: "ห้อง", Link: "./employee/room" },
 { title: "เครื่องมือ", Link: "./employee" },
 { title: "รายงาน", Link: "./employee" },

@@ -25,7 +25,6 @@ export async function PUT(
         },
         data: {
             name: json.name || null,
-            startus: json.startus || null,
             details: json.details || null,
             no: json.no || null, // Corrected field name
             building: json.building || null,
