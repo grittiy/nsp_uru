@@ -2,8 +2,8 @@
 import { Mali } from 'next/font/google'
 import './globals.css'
 import Providers from './components/Providers'
-import Appbar from './components/Appbar'
-import { ReactNode } from 'react'
+import MyAppBar from './components/ui/alert/HeaderBar'
+
 
 const mail = Mali({ subsets: ['latin'], weight: '200' })
 
@@ -12,22 +12,25 @@ export const metadata = {
   description: 'Northern Science Park URU',
 }
 
-interface LayoutProps {
-  children: ReactNode;
-  userRole: 'ADMIN' | 'DIRECTOR' | 'EMPLOYEE' | 'USER';
-}
+// interface LayoutProps {
+//   children: ReactNode;
+//   userRole: 'ADMIN' | 'DIRECTOR' | 'EMPLOYEE' | 'USER';
+// }
 
 export default function RootLayout({
-  children, userRole
-}:LayoutProps ) {
+  children,
+}: {
+  children: React.ReactNode
+})  {
   return (
 
     <html lang="en">
       <body className={mail.className}>
 
         <Providers> 
-        <Appbar userRole={userRole}/>
-
+        <MyAppBar/>
+       
+{/* <MyAppBar/> */}
           {children}
          
           

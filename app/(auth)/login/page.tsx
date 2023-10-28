@@ -1,11 +1,33 @@
 'use client'
 import Link from "next/link";
 import { LoginForm } from "./form";
-import { FormEvent } from "react";
-import { signIn } from "next-auth/react"
+import { FormEvent, useEffect } from "react";
+import { signIn, useSession } from "next-auth/react"
 import { BsLine, BsGoogle } from 'react-icons/bs';
+import { useRouter } from "next/navigation";
+import liff from "@line/liff";
+import MyAppBar from "@/app/components/ui/alert/HeaderBar";
 
 export default function LoginPage() {
+    const { data: session  } = useSession()
+    const router = useRouter()
+
+    useEffect(() => {
+        //code 
+        if (session && session.user) {
+            if (session.user.role === 'ADMIN') {
+                router.push('/admin')
+            } else if (session.user.role === 'DIRECTOR') {
+                router.push('/driector')
+            } else if (session.user.role === 'EMPLOYEE') {
+                router.push('/employee')
+            } else if (session.user.role === 'USER') {
+                router.push('/user')
+            }
+        }
+    }, [session, router])
+
+
     const heandleGoogleSignIn = (event: FormEvent<Element>) => {
         event.preventDefault()
         signIn('google', { callbackUrl: 'http://localhost:3000/' })
@@ -18,6 +40,7 @@ export default function LoginPage() {
     }
 
     return (
+        <>
         <main>
             <title>เข้าสู่ระบบ | NSP URU</title>
          
@@ -32,10 +55,10 @@ export default function LoginPage() {
                                 <h2 className="text-3xl font-semibold text-blue-700 mb-2">เข้าสู่ระบบ</h2>
                                 <div className="border-2 w-10 border-blue-700 inline-block mb-2" />
                                 <div className="flex justify-center my-2">
-                                    <button type="button" onClick={heandleGoogleSignIn} className="border-2  border-rose-300 rounded-full p-3 mx-1">
+                                    <button type="submit" onClick={heandleGoogleSignIn} className="border-2  border-rose-300 rounded-full p-3 mx-1">
                                         <BsGoogle className="text-lg " color="#c21750" />
                                     </button>
-                                    <button type="button" onClick={heandleLineSignIn} className="border-2  border-green-400  rounded-full p-3 mx-1">
+                                    <button type="submit" onClick={heandleLineSignIn} className="border-2  border-green-400  rounded-full p-3 mx-1">
                                         <BsLine className="text-lg " color="#25bd2c" />
                                     </button>
                                 </div>
@@ -61,6 +84,7 @@ export default function LoginPage() {
             </div>
 
         </main>
+        </>
 
     )
 } 

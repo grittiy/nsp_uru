@@ -20,17 +20,7 @@ export default function RegisterPage() {
     return (
         <main>
             <title>ลงทะเบียน | NSP URU</title>
-            {/* <div className="h-screen w-screen flex justify-center items-center bg-slate-100">
-            <div className="sm:shadow-xl px-8 pb-8 pt-12 sm:bg-white rounded-xl space-y-12">
-            <h1 className="font-semibold text-2xl">Register</h1>
-            <RegisterForm />
-            <p className='text-center'>Have an account?{''}
-            <Link className='text-indigo-500 hover:underline' href="/login">
-                Sign in
-            </Link>{''}
-            </p>
-            </div>
-        </div> */}
+        
             <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-red-50 ">
                 <div className="flex flex-col container mx-auto">
                     <div className="flex flex-col lg:flex-row w-2/3 lg:w-2/3 bg-white mx-auto  rounded-2xl shadow-2xl overflow-hidden text-center">
