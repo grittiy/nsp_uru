@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import { CldUploadWidget } from "next-cloudinary"
 import Image from 'next/image';
@@ -8,13 +9,20 @@ type Props = {
     imageUrls: string[]
     setImageUrls: React.Dispatch<React.SetStateAction<string[]>>
     handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    maxImages: number;
 }
 
-const ImageUpload: React.FC<Props> = ({ info, updateInfo, imageUrls, setImageUrls, handleImageChange }) => {
+const ImageUploadUser: React.FC<Props> = ({ info, updateInfo, imageUrls, setImageUrls, handleImageChange, maxImages }) => {
+
     const onupload = (result: any) => {
         updateInfo(result.info.secure_url)
         const newImageUrl = result.info.secure_url
-        setImageUrls(preImageUrls => [...preImageUrls, newImageUrl])
+        if (imageUrls.length < maxImages) {
+            setImageUrls(preImageUrls => [...preImageUrls, newImageUrl])
+        } else {
+            // Display a notification if the upload exceeds the specified limit.
+            alert(`อัพโหลดรูปได้ไม่เกิน ${maxImages} รูป`);
+        }
         handleImageChange(result)
     }
 
@@ -28,8 +36,11 @@ const ImageUpload: React.FC<Props> = ({ info, updateInfo, imageUrls, setImageUrl
 
     return (
         <div>
-            <div className='mb-10'>
-                <CldUploadWidget uploadPreset='uploadroom' onUpload={onupload}>
+            <div className='mb-10'
+
+            >
+                <CldUploadWidget uploadPreset='uploaduser' onUpload={onupload} >
+
                     {({ open }: any) => {
                         function handleOnclick(e: React.MouseEvent<HTMLButtonElement>) {
                             e.preventDefault()
@@ -46,13 +57,9 @@ const ImageUpload: React.FC<Props> = ({ info, updateInfo, imageUrls, setImageUrl
             </div>
             <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10'>
                 {imageUrls.map((imageUrl, index) => (
-                    <div key={index} className='flex flex-col justify-center'style={{ marginBottom: '20px' }}>
-                        <Image
-                            src={imageUrl}
-                            width={300}
-                            height={250}
-                            alt={`uploaded Image ${index + 1}`}
-                        />
+                    <div key={index} className='flex flex-col justify-center' style={{ marginBottom: '20px' }}>
+                        <img src={imageUrl} width={300} height={300} alt={`uploaded Image ${index + 1}`} />
+
                         <div className="mt-3"> {/* Add margin-top for spacing */}
                             <button
                                 type="button"
@@ -71,4 +78,4 @@ const ImageUpload: React.FC<Props> = ({ info, updateInfo, imageUrls, setImageUrl
 }
 
 
-export default ImageUpload
+export default ImageUploadUser

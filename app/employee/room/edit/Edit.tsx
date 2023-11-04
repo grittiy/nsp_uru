@@ -1,6 +1,6 @@
 'use client'
 
-import ImageUpload from "@/app/components/ImageUpload"
+import ImageUpload from "@/app/components/ImageUpload/ImageUploadroom"
 import axios from "axios"
 import { useSession } from "next-auth/react"
 import { useRouter } from 'next/navigation'
@@ -68,21 +68,21 @@ const Edit = ({ id, room, name, details, no, building, location, roomimage }: Pr
   }
 
   const isNameDuplicated = async () => {
-    // เรียก API ดึงข้อมูลห้องทั้งหมดจากฐานข้อมูล
+    //Call the API to retrieve all room data from the database.
    try {
     const response = await axios.get('/api/rooms');
     const allRooms = response.data;
 
-    // ตรวจสอบว่ามีชื่อห้องที่ซ้ำหรือไม่
+    // Check whether there are duplicate room names
     const isDuplicate = allRooms.some((room: Room) => {
-      // ตรวจสอบชื่อห้องที่ไม่ซ้ำและ ID ไม่เท่ากับ ID ของรายการที่กำลังแก้ไข
+      // Check for a non-duplicate room name and an ID different from the ID being edited
       return room.name === formData.name && room.id !== formData.id;
     });
 
     return isDuplicate;
     } catch (error) {
         console.error(error);
-        return true; // หากมีข้อผิดพลาดในการดึงข้อมูลให้ถือว่าชื่อห้องซ้ำ
+        return true; // If there is an error in data retrieval, consider the room name as a duplicate.
     }
 }
 
@@ -97,6 +97,11 @@ const Edit = ({ id, room, name, details, no, building, location, roomimage }: Pr
     handleImageChange()
 
     let alertMessage = '';
+
+    if (imageUrls.length > 1) {
+      alert('อัพโหลดรูปได้ไม่เกิน 5 รูป');
+      return;
+  }
 
     switch (true) {
       case !formData.name && !formData.no && !formData.building && !formData.details && !formData.location && !formData.roomimage:
@@ -219,7 +224,7 @@ const Edit = ({ id, room, name, details, no, building, location, roomimage }: Pr
                                 <label htmlFor="" className="font-semibold ">อัพโหลดรูปภาพ
                                     <span className="text-red-500">*</span>
                                 </label>
-                                <ImageUpload info={info} updateInfo={updateinfo} imageUrls={imageUrls} setImageUrls={setImageUrls} handleImageChange={handleImageChange} />
+                                <ImageUpload info={info} updateInfo={updateinfo} imageUrls={imageUrls} setImageUrls={setImageUrls} handleImageChange={handleImageChange} maxImages={5} />
                             </div>
 
                             <div className="text-center pt-6">

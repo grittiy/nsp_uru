@@ -7,33 +7,35 @@ type Props = {
 }
 
 const EditRoom = async ({ params }: { params: { slug: string } }) => {
-  const roomId = parseInt(params.slug, 10)
-  
-  if (isNaN(roomId)) {
-   return <div>Invalid room ID</div>
-  }
+    const roomId = parseInt(params.slug, 10)
 
-  
-    try{
+    if (isNaN(roomId)) {
+        return <main>
+            Invalid room ID</main>
+    }
+
+
+    try {
         const room = await prisma.rooms.findUnique({
-            where:{
-                id:roomId
+            where: {
+                id: roomId
             }
         })
 
-        if(!room){
+        if (!room) {
             return <div>Product id not fount</div>
         }
 
-        return(
+        return (
             <div>
-                <Edit {...room}/>
+                   <title>แก้ไขข้อมูลห้อง | NSP URU</title>
+                <Edit {...room} />
             </div>
         )
-  } catch (error) {
-    console.log("Error",error)
-    return <div>Error fetching room</div>
-  }
+    } catch (error) {
+        console.log("Error", error)
+        return <div>Error fetching room</div>
+    }
 }
 
 

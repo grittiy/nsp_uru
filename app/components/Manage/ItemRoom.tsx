@@ -29,8 +29,6 @@ export default function Item() {
   const [page, pagechange] = useState(0);
   const [rowperpage, rowperpagechange] = useState(5);
   const [searchQuery, setSearchQuery] = useState("");
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [open, setOpen] = useState<boolean[]>(new Array(rows.length).fill(false));
   const [menuAnchor, setMenuAnchor] = useState<Map<number, HTMLElement | null>>(new Map());
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -138,7 +136,7 @@ export default function Item() {
   };
 
   const handleDelete = async (idToDelete: number, currentPage: number) => {
-    console.log('row', idToDelete);
+    // console.log('row', idToDelete);
     deleteRow(idToDelete, currentPage);
   };
 
@@ -205,6 +203,7 @@ export default function Item() {
                 <Box sx={{ paddingLeft: 10, paddingRight: 10, paddingTop: 2 }}>
                   <Input type="text"
                     fullWidth
+                    sx={{ fontFamily: prompt.style.fontFamily }}
                     placeholder="ค้นหาข้อมูลห้องด้วยเลขที่ห้อง หรือ ชื่อห้อง"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}

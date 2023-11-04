@@ -86,8 +86,8 @@ const drawerEmployee = [
 ]
 
 const drawerE = [
-  { title: "ผู้เข้าใช้ระบบ", Link: "./employee" },
-  { title: "ห้อง", Link: "./employee/room" },
+  { title: "ผู้เข้าใช้ระบบ", Link: "/employee" },
+  { title: "ห้อง", Link: "/employee/room" },
   { title: "เครื่องมือ", Link: "./employee" },
   { title: "รายงาน", Link: "./employee" },
   { title: "การตรวจสอบสถานะ", Link: "./employee" },

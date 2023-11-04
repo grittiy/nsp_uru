@@ -1,6 +1,6 @@
 'use client'
 
-import ImageUpload from "@/app/components/ImageUpload"
+import ImageUploadRoom from "@/app/components/ImageUpload/ImageUploadroom"
 import axios from "axios"
 import { useSession } from "next-auth/react"
 import { useRouter } from 'next/navigation'
@@ -55,16 +55,16 @@ export const AddroomForm = (props: Props) => {
     }
 
     const isNameDuplicated = async () => {
-        // เรียก API ดึงข้อมูลห้องทั้งหมดจากฐานข้อมูล
+        // Calling an API to retrieve information about all rooms from a database
         try {
             const response = await axios.get('/api/rooms');
             const allRooms = response.data;
-            // ตรวจสอบว่ามีชื่อห้องซ้ำหรือไม่
+            // Checking for duplicate room names
             const isDuplicate = allRooms.some((room: Room) => room.name === formData.name);
             return isDuplicate;
         } catch (error) {
             console.error(error);
-            return true; // หากมีข้อผิดพลาดในการดึงข้อมูลให้ถือว่าชื่อห้องซ้ำ
+            return true; // If there is an error while retrieving data, consider it as a duplicate room name.
         }
     }
 
@@ -96,6 +96,11 @@ export const AddroomForm = (props: Props) => {
         handleImageChange()
 
         let alertMessage = '';
+
+        if (imageUrls.length > 1) {
+            alert('อัพโหลดรูปได้ไม่เกิน 5 รูป');
+            return;
+        }
 
         switch (true) {
             case !formData.name && !formData.no && !formData.building && !formData.details && !formData.location && !formData.roomimage:
@@ -155,7 +160,7 @@ export const AddroomForm = (props: Props) => {
                                     <span className="text-red-500">*</span>
                                 </label>
                                 <input
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-700 dark:placeholder-gray-500 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     type="text"
                                     name="name"
                                     placeholder="ห้องประชุม"
@@ -219,7 +224,7 @@ export const AddroomForm = (props: Props) => {
                                 <label htmlFor="" className="font-semibold ">อัพโหลดรูปภาพ
                                     <span className="text-red-500">*</span>
                                 </label>
-                                <ImageUpload info={info} updateInfo={updateinfo} imageUrls={imageUrls} setImageUrls={setImageUrls} handleImageChange={handleImageChange} />
+                                <ImageUploadRoom info={info} updateInfo={updateinfo} imageUrls={imageUrls} setImageUrls={setImageUrls} handleImageChange={handleImageChange} maxImages={5} />
                             </div>
 
                             <div className="text-center pt-6">

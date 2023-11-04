@@ -17,23 +17,26 @@ enum UserRole {
   USER
 }
 enum PersonType {
+  NULL
   INTERNAL
   EXTERNAL
 }
 
 enum InternalType {
-  TEACHER
+  NULL
+  LECTURER
   STUDENT
   STAFF
 }
 
 enum ExternalType {
+  NULL
   GOVERNMENT
   PRIVATE
 }
 
 model User {
-  id               String        @id @unique @default(uuid())
+  id                Int        @id @unique @default(autoincrement())
   usr              String        @default(dbgenerated("CONCAT('usr', LPAD(FLOOR(RAND() * 10000000000), 7, '0'))"))
   name             String        @db.VarChar(50)
   email            String?       @unique
@@ -43,8 +46,7 @@ model User {
   lineId           String?       @unique @db.VarChar(33)
   role             UserRole      @default(USER)
   pname            String?        @db.VarChar(20)
-  fname            String?        @db.VarChar(50)
-  lname            String?        @db.VarChar(50)
+  fname            String?        @db.VarChar(50) @unique
   sex              String?        @db.VarChar(5)
   position         String?        @db.VarChar(50)
   person           String?        @db.VarChar(50)
@@ -56,7 +58,6 @@ model User {
   externalType     ExternalType?
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
-   @@unique([fname, lname])
 }
 
 model Rooms {

@@ -3,7 +3,7 @@ import { Box, Paper, Typography } from "@mui/material";
 import { AddroomForm } from "./form";
 import { Mali } from 'next/font/google';
 import CustomizedDialogs from "@/app/components/pop-up/dialog";
-import Item from "@/app/components/Manage/Item";
+import Item from "@/app/components/Manage/ItemRoom";
 
 const prompt = Mali({
     weight: ["300", "400"],
@@ -14,6 +14,7 @@ const prompt = Mali({
 export default function RoomPage() {
     return (
         <main className="mx-auto container">
+                 <title>ห้อง | NSP URU</title>
             <Paper elevation={6} sx={{ borderRadius: '16px' }}>
                 <Box sx={{
                     p: 2,
