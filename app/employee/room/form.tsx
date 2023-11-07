@@ -29,8 +29,6 @@ export const AddroomForm = (props: Props) => {
         location: '',
         roomimage: '',
     })
-
-
     const [info, updateinfo] = useState<any>()
     const [imageUrls, setImageUrls] = useState<string[]>([])
     const [errors, setErrors] = useState<string[]>([]);
@@ -42,8 +40,6 @@ export const AddroomForm = (props: Props) => {
             [name]: value
         })
     }
-
-
 
     const handleImageChange = () => {
         const stringimages = JSON.stringify(imageUrls)

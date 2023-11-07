@@ -11,7 +11,7 @@ type Props = {
     maxImages: number;
 }
 
-const ImageUploadRoom: React.FC<Props> = ({ info, updateInfo, imageUrls, setImageUrls, handleImageChange, maxImages }) => {
+const ImageUploadTool: React.FC<Props> = ({ info, updateInfo, imageUrls, setImageUrls, handleImageChange, maxImages }) => {
     const onupload = (result: any) => {
         updateInfo(result.info.secure_url)
         const newImageUrl = result.info.secure_url
@@ -35,7 +35,7 @@ const ImageUploadRoom: React.FC<Props> = ({ info, updateInfo, imageUrls, setImag
     return (
         <div>
             <div className='mb-10'>
-                <CldUploadWidget uploadPreset='uploadroom' onUpload={onupload}>
+                <CldUploadWidget uploadPreset='uploadtool' onUpload={onupload}>
                     {({ open }: any) => {
                         function handleOnclick(e: React.MouseEvent<HTMLButtonElement>) {
                             e.preventDefault()
@@ -53,7 +53,7 @@ const ImageUploadRoom: React.FC<Props> = ({ info, updateInfo, imageUrls, setImag
             <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10'>
                 {imageUrls.map((imageUrl, index) => (
                     <div key={index} className='flex flex-col justify-center'style={{ marginBottom: '20px' }}>
-                         <img src={imageUrl} width={300} height={300} alt={`uploaded Image ${index + 1}`} />
+                        <img src={imageUrl} width={300} height={300} alt={`uploaded Image ${index + 1}`} />
                         <div className="mt-3"> {/* Add margin-top for spacing */}
                             <button
                                 type="button"
@@ -72,4 +72,4 @@ const ImageUploadRoom: React.FC<Props> = ({ info, updateInfo, imageUrls, setImag
 }
 
 
-export default ImageUploadRoom
+export default ImageUploadTool

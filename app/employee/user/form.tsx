@@ -486,7 +486,7 @@ export default function AdduserForm(props: Props) {
                                         <option value="PRIVATE">หน่อยงานเอกชน</option>
                                     </select>
                                     <div className='mt-4'>
-                                        <label htmlFor="fax" className="font-semibold">ชื่อหน่วยงาน
+                                        <label htmlFor="organizationName" className="font-semibold">ชื่อหน่วยงาน
                                             <span className="text-red-500">*</span>
                                         </label>
                                         <input

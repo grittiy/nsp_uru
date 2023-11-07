@@ -17,9 +17,9 @@ const prompt = Mali({
 
 const Sidebar = [{ title: "ผู้เข้าใช้ระบบ", Link: "/employee" },
 { title: "ห้อง", Link: "/employee/room" },
-{ title: "เครื่องมือ", Link: "./employee" },
-{ title: "รายงาน", Link: "./employee" },
-{ title: "การตรวจสอบสถานะ", Link: "./employee" },
+{ title: "เครื่องมือ", Link: "/employee/tool" },
+{ title: "รายงาน", Link: "/employee" },
+{ title: "การตรวจสอบสถานะ", Link: "/employee" },
 ]
 
 const drawerWidth = 240;
