@@ -27,6 +27,7 @@ interface Props {
     name: string
     band: string
     number: number
+    balance: number
     toolimage: string
     toolrate: PriceType
     internal: number | 0
@@ -71,17 +72,20 @@ const Edit = ({ id, tool, num, name, band, number, toolimage, toolrate, internal
     }, [])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        const { name, value } = e.target
-        // Check if the "type" field has changed
-        if (name === "toolrate") {
-            // If it has changed, reset the sub-type fields and set the new "type" value
-            setFormData({ ...formData, [name]: value as PriceType });
+        const {name, value} = e.target
+        if (name === 'toolrate' && formData.toolrate !== value) {
+            setFormData({
+                ...formData,
+                toolrate: value as PriceType,
+                internal: 0,
+                external: 0,
+                rate: ''
+            })
         } else {
-            // If it hasn't changed, update the field as usual
             setFormData({
                 ...formData,
                 [name]: value
-            });
+            })
         }
     }
 
@@ -112,6 +116,13 @@ const Edit = ({ id, tool, num, name, band, number, toolimage, toolrate, internal
             })
         }
 
+        useEffect(() => {
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                toolimage: imageUrls.toString()
+            }))
+        }, [imageUrls])
+
         const isNameDuplicated = async () => {
             try {
                 const response = await axios.get('/api/tools');
@@ -129,12 +140,7 @@ const Edit = ({ id, tool, num, name, band, number, toolimage, toolrate, internal
             }
         }
 
-        useEffect(() => {
-            setFormData((prevFormData) => ({
-                ...prevFormData,
-                toolimage: imageUrls.toString()
-            }))
-        }, [imageUrls])
+       
 
         const isNumValid = (NumNumber: string) => {
             return /^\d{6}$/.test(NumNumber);
@@ -207,7 +213,7 @@ const Edit = ({ id, tool, num, name, band, number, toolimage, toolrate, internal
             }
 
             try {
-                const response = await axios.post(`/api/tools/${id}`, formData)
+                const response = await axios.patch(`/api/tools/${id}`, formData)
                 router.push('/employee/tool')
                 console.log(response)
             } catch (error) {

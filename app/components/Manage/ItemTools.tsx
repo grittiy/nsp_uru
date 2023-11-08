@@ -111,7 +111,7 @@ export default function ItemTools() {
     const handleActiveToggle = async (id: number, active: boolean) => {
         try {
             // Update the Active status in the database.
-            await fetch(`/api/tools/${id}`, {
+            await fetch(`/api/updateActiveToggle/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
