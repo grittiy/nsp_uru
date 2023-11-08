@@ -16,6 +16,7 @@ type Props = {
     name: string
     band: string
     number: number
+    balance: number
     toolimage: string
     toolrate: PriceType
     internal: number | 0
@@ -53,6 +54,7 @@ const EditTool = async ({ params }: { params: { slug: string } }) => {
             name: tool.name,
             band: tool.band,
             number: tool.number,
+            balance: tool.balance ?? 0,
             toolimage: tool.toolimage,
             toolrate: tool.toolrate as PriceType,
             internal: tool.internal ?? 0,
