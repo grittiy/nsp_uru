@@ -93,7 +93,7 @@ export const AddroomForm = (props: Props) => {
 
         let alertMessage = '';
 
-        if (imageUrls.length > 1) {
+        if (imageUrls.length > 5) {
             alert('อัพโหลดรูปได้ไม่เกิน 5 รูป');
             return;
         }

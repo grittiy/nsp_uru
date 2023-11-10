@@ -56,32 +56,32 @@ const prompt = Mali({
 });
 
 const menus = [{ title: "LINE OA", Link: "https://line.me/ti/p/~776cnnvc" },
-{ title: "ปฏิทิน", Link: "./Line_OA" },
-{ title: "บริการต่างๆ", Link: "./Line_OA" },
+{ title: "ปฏิทิน", Link: "/Line_OA" },
+{ title: "บริการต่างๆ", Link: "/Services" },
 ]
 
 const menuUser = [{ title: "LINE OA", Link: "https://line.me/ti/p/~776cnnvc" },
-{ title: "ปฏิทิน", Link: "./Line_OA" },
-{ title: "บริการต่างๆ", Link: "./Line_OA" },
+{ title: "ปฏิทิน", Link: "/Line_OA" },
+{ title: "บริการต่างๆ", Link: "/Services" },
 { title: "รายการ", Link: "./user" },
 ]
 
 const menuAdmin = [{ title: "LINE OA", Link: "https://line.me/ti/p/~776cnnvc" },
-{ title: "ปฏิทิน", Link: "./Line_OA" },
-{ title: "บริการต่างๆ", Link: "./Line_OA" },
+{ title: "ปฏิทิน", Link: "/Line_OA" },
+{ title: "บริการต่างๆ", Link: "/Services" },
 { title: "รายการ", Link: "./admin" },
 ]
 
 const menuEmployee = [{ title: "LINE OA", Link: "https://line.me/ti/p/~776cnnvc" },
 { title: "ปฏิทิน", Link: "./Line_OA" },
-{ title: "บริการต่างๆ", Link: "./Line_OA" },
+{ title: "บริการต่างๆ", Link: "/Services" },
 { title: "รายการ", Link: "./employee" },
 ]
 const drawerEmployee = [
   { title: "หน้าหลัก", Link: "/" },
   { title: "LINE OA", Link: "https://line.me/ti/p/~776cnnvc" },
-  { title: "ปฏิทิน", Link: "./Line_OA" },
-  { title: "บริการต่างๆ", Link: "./Line_OA" },
+  { title: "ปฏิทิน", Link: "/Line_OA" },
+  { title: "บริการต่างๆ", Link: "/Services" },
 
 ]
 
@@ -95,8 +95,8 @@ const drawerE = [
 ]
 
 const menuDirector = [{ title: "LINE OA", Link: "https://line.me/ti/p/~776cnnvc" },
-{ title: "ปฏิทิน", Link: "./Line_OA" },
-{ title: "บริการต่างๆ", Link: "./Line_OA" },
+{ title: "ปฏิทิน", Link: "/Line_OA" },
+{ title: "บริการต่างๆ", Link: "/Services" },
 { title: "รายการ", Link: "./director" },
 ]
 

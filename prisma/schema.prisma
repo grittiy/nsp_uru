@@ -79,6 +79,7 @@ model Rooms {
 enum PriceType {
   NULL
   SAMPLE
+  HOUR
   DAY
   RATES
 }

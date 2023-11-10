@@ -16,6 +16,7 @@ type Tool = {
 enum PriceType {
     Null = "NULL",
     sample = "SAMPLE",
+    hour= "HOUR",
     day = "DAY",
     rates = "RATES"
 }
@@ -305,11 +306,36 @@ const Edit = ({ id, tool, num, name, band, number, toolimage, toolrate, internal
                                 >
                                     <option value="NULL" >...โปรดเลือก...</option>
                                     <option value="SAMPLE" >ราคาบาทต่อตัวอย่าง</option>
+                                    <option value="HOUR" >ราคาบาทต่อชั่วโมง</option>
                                     <option value="DAY">ราคาบาทต่อวัน</option>
                                     <option value="RATES">เรทราคา</option>
                                 </select>
                             </div>
                             {formData.toolrate === "SAMPLE" && (
+                                <div className=' grid grid-cols-2 md:grid-cols-2 gap-5 '>
+                                    <div>
+                                        <label htmlFor="internal" className="font-semibold">บุคลากรภายใน</label>
+                                        <input
+                                            className="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
+                                            type='number'
+                                            name='internal'
+                                            value={formData.internal}
+                                            onChange={handlePriceChange}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="external" className="font-semibold">บุคลากรภายนอก</label>
+                                        <input
+                                            className="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
+                                            type='number'
+                                            name='external'
+                                            value={formData.external}
+                                            onChange={handlePriceChange}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+                            {formData.toolrate === "HOUR" && (
                                 <div className=' grid grid-cols-2 md:grid-cols-2 gap-5 '>
                                     <div>
                                         <label htmlFor="internal" className="font-semibold">บุคลากรภายใน</label>

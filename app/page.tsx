@@ -6,14 +6,14 @@ import { User } from "./user"
 
 import LineoaPage from "./components/ScrollReact/LineoaPage"
 import CalendarPage from "./components/ScrollReact/CalendarPage"
+import Services from "./Services/page"
 import ServicesPage from "./components/ScrollReact/ServicesPage"
-import HeaderBar from "./components/ui/alert/HeaderBar"
-import MyAppBar from "./components/ui/alert/HeaderBar"
 
 
-export default  async function Page() {
+
+export default async function Page() {
   const session = await getServerSession(authOptions)
-  
+
   // const user = await prisma.user.findFirst({
   //   where:{
   //     email: 'test@test.com'
@@ -21,19 +21,19 @@ export default  async function Page() {
   // })
   return (
     <main>
-        <title>หน้าหลัก | NSP URU</title>
-        {/* <MyAppBar/> */}
-       
-        <LineoaPage/>
-        <CalendarPage/>
-        <ServicesPage/>
-  
-      
-      <h2>Server Session</h2>
+      <title>หน้าหลัก | NSP URU</title>
+      <div className="px-5 max-w-[1280px] mx-auto">
+        <LineoaPage />
+        <CalendarPage />
+        <br />
+        <ServicesPage />
+        <br />
+      {/* <h2>Server Session</h2>
       <pre>{JSON.stringify(session)}</pre>
-      <h2>Client Call</h2>
-      <User/>
+      <h2>Client Call</h2> */}
+      {/* <User /> */}
+      </div>
     </main>
   )
-  
+
 }

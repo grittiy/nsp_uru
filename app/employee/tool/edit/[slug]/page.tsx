@@ -5,6 +5,7 @@ import Edit from '../Edit'
 enum PriceType {
     Null = "NULL",
     sample = "SAMPLE",
+    hour= "HOUR",
     day = "DAY",
     rates = "RATES"
 }
