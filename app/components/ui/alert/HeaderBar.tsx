@@ -20,7 +20,8 @@ import {
   ListItemButton,
   ListItemText,
   Divider,
-  Collapse
+  Collapse,
+  Badge
 } from '@mui/material';
 import {
   useSession,
@@ -31,15 +32,12 @@ import Image from 'next/image';
 import { Mali } from 'next/font/google';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import LogoutIcon from '@mui/icons-material/Logout';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import WidgetsIcon from '@mui/icons-material/Widgets';
-import MailIcon from '@mui/icons-material/Mail';
-import DomainVerificationIcon from '@mui/icons-material/DomainVerification';
 import HomeIcon from '@mui/icons-material/Home';
 import ForumIcon from '@mui/icons-material/Forum';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
-import { prisma } from '@/lib/prisma';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
@@ -47,7 +45,8 @@ import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import ChangeHistoryIcon from '@mui/icons-material/ChangeHistory';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-
+import Link from 'next/link';
+import useSWR from 'swr';
 
 const prompt = Mali({
   weight: ["300", "400"],
@@ -107,6 +106,8 @@ const imageStyle = {
 }
 
 const drawerWidth = 240;
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 function DirectorAppBar() {
   const { data: session } = useSession();
@@ -318,13 +319,13 @@ function DirectorAppBar() {
 }
 
 function EmployeeAppBar() {
-
+  const { data: carts } = useSWR('/api/carts', fetcher);
   const { data: session } = useSession();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const [openDrawer, setopenDrawer] = useState(false)
   const [isCollapse, setIsCollapse] = useState(false);
-
+  const badgeContent = carts ? carts.length : 0;
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -337,6 +338,7 @@ function EmployeeAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
 
   const handleOpenReport = () => {
     setIsCollapse(!isCollapse); // กลับและปิด Collapse
@@ -527,6 +529,14 @@ function EmployeeAppBar() {
                       </Button>
                     )}
                   </MenuItem>
+                  <MenuItem onClick={handleCloseUserMenu} component={Link} href="/carts">
+                    <ListItemIcon>
+                      <Badge color="success" badgeContent={badgeContent}>
+                        <ShoppingBasketIcon color="success" />
+                      </Badge>
+                    </ListItemIcon>
+                    <Button sx={{ fontFamily: prompt.style.fontFamily, fontSize: 18, color: "#1b5e20" }} >ตะกร้า</Button>
+                  </MenuItem>
                   <MenuItem onClick={handleCloseUserMenu}>
                     <ListItemIcon>
                       <LogoutIcon color="success" />
@@ -549,8 +559,8 @@ function AdminAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const [openDrawer, setopenDrawer] = useState(false)
-
-
+  const { data: carts } = useSWR('/api/carts', fetcher);
+  const badgeContent = carts ? carts.length : 0;
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -732,6 +742,14 @@ function AdminAppBar() {
                       </Button>
                     )}
                   </MenuItem>
+                  <MenuItem onClick={handleCloseUserMenu} component={Link} href="/carts">
+                    <ListItemIcon>
+                      <Badge color="success" badgeContent={badgeContent}>
+                        <ShoppingBasketIcon color="success" />
+                      </Badge>
+                    </ListItemIcon>
+                    <Button sx={{ fontFamily: prompt.style.fontFamily, fontSize: 18, color: "#1b5e20" }} >ตะกร้า</Button>
+                  </MenuItem>
                   <MenuItem onClick={handleCloseUserMenu}>
                     <ListItemIcon>
                       <LogoutIcon color="success" />
@@ -753,8 +771,8 @@ function UserAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const [openDrawer, setopenDrawer] = useState(false)
-
-
+  const { data: carts } = useSWR('/api/carts', fetcher);
+  const badgeContent = carts ? carts.length : 0;
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -936,6 +954,14 @@ function UserAppBar() {
                         {session.user.name}
                       </Button>
                     )}
+                  </MenuItem>
+                  <MenuItem onClick={handleCloseUserMenu} component={Link} href="/carts">
+                    <ListItemIcon>
+                      <Badge color="success" badgeContent={badgeContent}>
+                        <ShoppingBasketIcon color="success" />
+                      </Badge>
+                    </ListItemIcon>
+                    <Button sx={{ fontFamily: prompt.style.fontFamily, fontSize: 18, color: "#1b5e20" }} >ตะกร้า</Button>
                   </MenuItem>
                   <MenuItem onClick={handleCloseUserMenu}>
                     <ListItemIcon>
@@ -1143,6 +1169,7 @@ function NullAppBar() {
                       </Button>
                     )}
                   </MenuItem>
+
                   <MenuItem onClick={handleCloseUserMenu}>
                     <ListItemIcon>
                       <LogoutIcon color="success" />

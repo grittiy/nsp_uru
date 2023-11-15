@@ -45,6 +45,7 @@ model User {
   password         String
   active           Boolean       @default(true)
   lineId           String?       @unique @db.VarChar(33)
+  googleId           String?       @unique @db.VarChar(33)
   role             UserRole      @default(USER)
   pname            String?       @db.VarChar(20)
   fname            String?       @unique @db.VarChar(50)
@@ -59,6 +60,7 @@ model User {
   externalType     ExternalType?
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
+  Cart             Carts[]
 }
 
 model Rooms {
@@ -73,6 +75,7 @@ model Rooms {
   active    Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Cart      Carts[]
   // check       check_statusRoom[]
 }
 
@@ -87,7 +90,7 @@ enum PriceType {
 model Tools {
   id        Int        @id @default(autoincrement())
   tool      String     @default(dbgenerated("CONCAT('tool', LPAD(FLOOR(RAND() * 10000000000), 7, '0'))"))
-  num       String     @db.Char(6)  @unique
+  num       String     @unique @db.Char(6)
   name      String     @db.VarChar(50)
   band      String     @db.VarChar(50)
   number    Int
@@ -97,12 +100,28 @@ model Tools {
   internal  Int?
   external  Int?
   rate      String?    @db.VarChar(50)
-  details   String?     @db.VarChar(255)
+  details   String?    @db.VarChar(255)
   breakdown Int?
   repair    Int?
   lost      Int?
   active    Boolean    @default(false)
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+  Cart      Carts[]
+
   @@unique([name, band])
+}
+
+model Carts {
+  id     Int    @id @default(autoincrement())
+  roomId Int?
+  Room   Rooms? @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  toolId Int?
+  Tool   Tools? @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  userId Int
+  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([roomId])
+  @@index([toolId])
+  @@index([userId])
 }

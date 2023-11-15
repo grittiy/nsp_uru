@@ -1,8 +1,12 @@
 'use client'
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Grid, Paper, Typography } from '@mui/material'
+import { Badge, Box, Button, Card, CardActions, CardContent, CardMedia, Fab, Grid, Paper, Typography, styled } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { Mali } from 'next/font/google'
 import Link from 'next/link';
+import AddCarts from '../ui/AddCarts';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import { useSession } from 'next-auth/react';
+import useSWR from 'swr';
 
 const prompt = Mali({
   weight: ["300", "400"],
@@ -30,11 +34,19 @@ interface Room {
   details: string
 }
 
-export default function ServicesPage() {
+const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
+
+
+export default function ServicesPage() {
+  const { data: session } = useSession();
   const [rooms, setRooms] = useState<Room[]>([]);
   const [tools, setTools] = useState<Tool[]>([]);
   const [filter, setFilter] = useState('all');
+
+  const { data: carts } = useSWR('/api/carts', fetcher);
+
+  const badgeContent = carts ? carts.length : 0;
 
   useEffect(() => {
     // Use fetch to retrieve data from the API.
@@ -57,6 +69,8 @@ export default function ServicesPage() {
         console.error('เกิดข้อผิดพลาดในการดึงข้อมูล:', error);
       });
   }, []);
+
+
 
   return (
     <React.Fragment>
@@ -87,10 +101,10 @@ export default function ServicesPage() {
                     >
                       <Button
                         sx={{
-                          fontFamily: prompt.style.fontFamily, fontSize: 15, fontWeight: 'bold',  color: filter === 'all' ?  'gray':'black' 
+                          fontFamily: prompt.style.fontFamily, fontSize: 15, fontWeight: 'bold', color: filter === 'all' ? 'gray' : 'black'
                         }}
                         onClick={() => setFilter('all')}
-                     
+
                       >
                         ทั้งหมด
                       </Button>
@@ -112,10 +126,10 @@ export default function ServicesPage() {
                     >
                       <Button
                         sx={{
-                          fontFamily: prompt.style.fontFamily, fontSize: 15, fontWeight: 'bold',color: filter === 'rooms' ?  'gray':'black' , 
+                          fontFamily: prompt.style.fontFamily, fontSize: 15, fontWeight: 'bold', color: filter === 'rooms' ? 'gray' : 'black',
 
                         }}
-                        onClick={() => setFilter('rooms')}          
+                        onClick={() => setFilter('rooms')}
                       >
                         ห้อง
                       </Button>
@@ -137,10 +151,10 @@ export default function ServicesPage() {
                     >
                       <Button
                         sx={{
-                          fontFamily: prompt.style.fontFamily, fontSize: 15, fontWeight: 'bold', color: filter === 'tools' ?  'gray':'black' , 
+                          fontFamily: prompt.style.fontFamily, fontSize: 15, fontWeight: 'bold', color: filter === 'tools' ? 'gray' : 'black',
 
                         }}
-                        onClick={() => setFilter('tools')}              
+                        onClick={() => setFilter('tools')}
                       >
                         เครื่องมือ
                       </Button>
@@ -157,7 +171,7 @@ export default function ServicesPage() {
                 sx={{
                   p: 2,
                   width: 'auto',
-                  height:800,
+                  height: 800,
                   border: 7,
                   borderColor: "#dae0a0",
                   borderRadius: '16px',
@@ -193,7 +207,7 @@ export default function ServicesPage() {
                               </Typography>
                             </CardContent>
                             <CardActions>
-                              <Button size="small" sx={{ fontFamily: prompt.style.fontFamily }}>เพิ่มใส่ในตะกร้า</Button>
+                              <AddCarts roomId={room.id} />
                               <Link href={"/room/" + room.id}>
                                 <Button size="small" sx={{ fontFamily: prompt.style.fontFamily }}>รายละเอียด</Button>
                               </Link>
@@ -248,8 +262,7 @@ export default function ServicesPage() {
 
                             </CardContent>
                             <CardActions>
-                              <Button size="small" sx={{ fontFamily: prompt.style.fontFamily }}>เพิ่มใส่ในตะกร้า</Button>
-                              <Link href={"/tool/" + tool.id}>
+                              <AddCarts toolId={tool.id} />                              <Link href={"/tool/" + tool.id}>
                                 <Button size="small" sx={{ fontFamily: prompt.style.fontFamily }}>รายละเอียด</Button>
                               </Link>
                             </CardActions>
@@ -261,7 +274,7 @@ export default function ServicesPage() {
 
                   {filter === 'rooms' && (
                     <>
-                     {rooms.map(room => (
+                      {rooms.map(room => (
                         <Grid item xs={12} sm={6} md={4} key={room.id}>
                           <Card >
                             <CardMedia
@@ -285,7 +298,7 @@ export default function ServicesPage() {
                               </Typography>
                             </CardContent>
                             <CardActions>
-                              <Button size="small" sx={{ fontFamily: prompt.style.fontFamily }}>เพิ่มใส่ในตะกร้า</Button>
+                              <AddCarts roomId={room.id} />
                               <Link href={"/room/" + room.id}>
                                 <Button size="small" sx={{ fontFamily: prompt.style.fontFamily }}>รายละเอียด</Button>
                               </Link>
@@ -297,7 +310,7 @@ export default function ServicesPage() {
                   )}
                   {filter === 'tools' && (
                     <>
-                     {tools.map(tool => (
+                      {tools.map(tool => (
                         <Grid item xs={12} sm={12} md={4} key={tool.id}>
                           <Card>
                             <CardMedia
@@ -344,7 +357,7 @@ export default function ServicesPage() {
 
                             </CardContent>
                             <CardActions>
-                              <Button size="small" sx={{ fontFamily: prompt.style.fontFamily }}>เพิ่มใส่ในตะกร้า</Button>
+                              <AddCarts toolId={tool.id} />
                               <Link href={"/tool/" + tool.id}>
                                 <Button size="small" sx={{ fontFamily: prompt.style.fontFamily }}>รายละเอียด</Button>
                               </Link>
@@ -356,7 +369,24 @@ export default function ServicesPage() {
                   )}
 
                 </Grid>
+                <div className="rightbottom">
 
+                  {session ? (
+                    <Link href="/carts">
+                      <Badge color="primary" badgeContent={badgeContent} >
+                        <Fab className="primary" aria-label="card">
+                          <ShoppingBasketIcon />
+                        </Fab>
+                      </Badge>
+                    </Link>
+                  ) : (
+                    <Link href="/login">
+                      <Fab className="primary-fab" aria-label="card">
+                        <ShoppingBasketIcon />
+                      </Fab>
+                    </Link>
+                  )}
+                </div>
               </Box>
             </Paper>
           </Grid>

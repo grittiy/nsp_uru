@@ -16,7 +16,7 @@ export default function UserPage() {
     return (
         <main className="mx-auto container">
               <title>จัดการข้อมูลผู้ใช้งานระบบ | NSP URU</title>
-            <Paper elevation={6} sx={{ borderRadius: '16px' }}>
+            <Paper elevation={6} sx={{ borderRadius: '1Paper6px' }}>
                 <Box
                     sx={{
                         p: 2,

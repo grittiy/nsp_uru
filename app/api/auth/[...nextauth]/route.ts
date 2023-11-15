@@ -140,10 +140,12 @@ export const authOptions: NextAuthOptions = {
         }
         const user = await prisma.user.upsert({
           where: {
+            googleId: profile.sub,
             email: profile.email,
           },
           create: {
             email: profile.email,
+            googleId: profile.sub,
             name: profile.name,
             avatar: (profile as any).picture,
             password: hashedPassword || '',
@@ -201,10 +203,10 @@ export const authOptions: NextAuthOptions = {
       }
       return true
     },
-    async jwt({ token, user,account,profile }) {
-console.log({token,account,profile,user})
+    async jwt({ token, user, account, profile }) {
+      console.log({ token, account, profile, user })
       if (user) {
-        token.id = user.id
+        token.id  = user.id
         token.role = user.role
       }
 
@@ -235,6 +237,10 @@ console.log({token,account,profile,user})
       }
       if (token && user) {
         session.user.role = user.role;
+      }
+
+      if(session?.user){
+        session.user.id = token.id;
       }
       return session
     }
