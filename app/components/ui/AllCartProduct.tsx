@@ -22,7 +22,6 @@ type Props = {
 
 
 const AllCartProduct = async (props: Props) => {
-    
 
     const allcartproduct = await prisma.carts.findMany({
         where: {

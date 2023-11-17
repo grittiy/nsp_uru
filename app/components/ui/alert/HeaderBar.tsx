@@ -287,13 +287,13 @@ function DirectorAppBar() {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  <MenuItem onClick={handleCloseUserMenu}>
+                  <MenuItem onClick={handleCloseUserMenu} component={Link} href="/Profile">
                     <Typography textAlign="center" >
                       <ListItemIcon>
                         <AssignmentIndIcon color="success" />
                       </ListItemIcon>
                       {session?.user && (
-                        <Button sx={{ fontFamily: prompt.style.fontFamily, fontSize: 18, color: "#1b5e20" }}>
+                        <Button href={`/Profile/${session.user.id}`} sx={{ fontFamily: prompt.style.fontFamily, fontSize: 18, color: "#1b5e20" }}>
                           {session.user.name}
                         </Button>
                       )}
@@ -524,7 +524,7 @@ function EmployeeAppBar() {
                       <AssignmentIndIcon color="success" />
                     </ListItemIcon>
                     {session?.user && (
-                      <Button sx={{ fontFamily: prompt.style.fontFamily, fontSize: 18, color: "#1b5e20" }}>
+                      <Button href={`/Profile/${session.user.id}`}  sx={{ fontFamily: prompt.style.fontFamily, fontSize: 18, color: "#1b5e20" }}>
                         {session.user.name}
                       </Button>
                     )}
@@ -732,12 +732,12 @@ function AdminAppBar() {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  <MenuItem onClick={handleCloseUserMenu}>
+                  <MenuItem onClick={handleCloseUserMenu} component={Link} href="/Profile">
                     <ListItemIcon>
                       <AssignmentIndIcon color="success" />
                     </ListItemIcon>
                     {session?.user && (
-                      <Button sx={{ fontFamily: prompt.style.fontFamily, fontSize: 18, color: "#1b5e20" }}>
+                      <Button href={`/Profile/${session.user.id}`} sx={{ fontFamily: prompt.style.fontFamily, fontSize: 18, color: "#1b5e20" }}>
                         {session.user.name}
                       </Button>
                     )}
@@ -950,7 +950,7 @@ function UserAppBar() {
                       <AssignmentIndIcon color="success" />
                     </ListItemIcon>
                     {session?.user && (
-                      <Button sx={{ fontFamily: prompt.style.fontFamily, fontSize: 18, color: "#1b5e20" }}>
+                      <Button href={`/Profile/${session.user.id}`} sx={{ fontFamily: prompt.style.fontFamily, fontSize: 18, color: "#1b5e20" }}>
                         {session.user.name}
                       </Button>
                     )}
@@ -1159,12 +1159,12 @@ function NullAppBar() {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  <MenuItem onClick={handleCloseUserMenu}>
+                  <MenuItem onClick={handleCloseUserMenu} component={Link} href="/Profile">
                     <ListItemIcon>
                       <AssignmentIndIcon color="success" />
                     </ListItemIcon>
                     {session?.user && (
-                      <Button sx={{ fontFamily: prompt.style.fontFamily, fontSize: 18, color: "#1b5e20" }}>
+                      <Button href={`/Profile/${session.user.id}`} sx={{ fontFamily: prompt.style.fontFamily, fontSize: 18, color: "#1b5e20" }}>
                         {session.user.name}
                       </Button>
                     )}
