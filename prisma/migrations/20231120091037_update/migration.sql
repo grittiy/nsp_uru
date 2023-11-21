@@ -1,4 +1,10 @@
 -- AlterTable
+ALTER TABLE `reservations` MODIFY `name` VARCHAR(50) NULL,
+    MODIFY `objective` VARCHAR(255) NULL,
+    MODIFY `startdate` DATETIME(3) NULL,
+    MODIFY `enddate` DATETIME(3) NULL;
+
+-- AlterTable
 ALTER TABLE `rooms` MODIFY `room` VARCHAR(191) NOT NULL DEFAULT CONCAT('room', LPAD(FLOOR(RAND() * 10000000000), 7, '0'));
 
 -- AlterTable

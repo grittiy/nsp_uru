@@ -54,9 +54,8 @@ const AllCartProduct = async (props: Props) => {
     const cartRooms = await Promise.all(cartRoomPromises)
     const cartTools = await Promise.all(cartToolPromises)
 
-    const roomIds = allcartproduct.map((item) => item.roomId);
-    const toolIds = allcartproduct.map((item) => item.toolId);
-
+    const roomId = allcartproduct.map((item) => item.roomId).filter((id) => id !== null)[0] as number | undefined;
+    const toolId = allcartproduct.map((item) => item.toolId).filter((id) => id !== null)[0] as number | undefined;
     if (cartRooms.length === 0 && cartTools.length === 0) {
         return (
             <div className='relative flex items-center justify-center'>
@@ -196,7 +195,7 @@ const AllCartProduct = async (props: Props) => {
                         </Grid>
                     </Paper>
                 ))}
-                <Button roomIds={roomIds} toolIds={toolIds} userId={props.userId} />
+                <Button roomId={roomId} toolId={toolId} userId={props.userId} />
             </div>
         </React.Fragment >
     )

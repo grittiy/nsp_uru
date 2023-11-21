@@ -37,45 +37,47 @@ enum ExternalType {
 }
 
 model User {
-  id               Int           @id @unique @default(autoincrement())
-  usr              String        @default(dbgenerated("CONCAT('usr', LPAD(FLOOR(RAND() * 10000000000), 7, '0'))"))
-  name             String        @db.VarChar(50)
-  email            String?       @unique
+  id               Int            @id @unique @default(autoincrement())
+  usr              String         @default(dbgenerated("CONCAT('usr', LPAD(FLOOR(RAND() * 10000000000), 7, '0'))"))
+  name             String         @db.VarChar(50)
+  email            String?        @unique
   avatar           String?
   password         String
-  active           Boolean       @default(true)
-  lineId           String?       @unique @db.VarChar(33)
-  googleId           String?       @unique @db.VarChar(33)
-  role             UserRole      @default(USER)
-  pname            String?       @db.VarChar(20)
-  fname            String?       @unique @db.VarChar(50)
-  sex              String?       @db.VarChar(5)
-  position         String?       @db.VarChar(50)
-  person           String?       @db.VarChar(50)
-  phone            String?       @db.Char(10)
-  fax              String?       @db.Char(9)
+  active           Boolean        @default(true)
+  lineId           String?        @unique @db.VarChar(33)
+  googleId         String?        @unique @db.VarChar(33)
+  role             UserRole       @default(USER)
+  pname            String?        @db.VarChar(20)
+  fname            String?        @unique @db.VarChar(50)
+  sex              String?        @db.VarChar(5)
+  position         String?        @db.VarChar(50)
+  person           String?        @db.VarChar(50)
+  phone            String?        @db.Char(10)
+  fax              String?        @db.Char(9)
   type             PersonType?
   organizationName String?
   internalType     InternalType?
   externalType     ExternalType?
-  createdAt        DateTime      @default(now())
-  updatedAt        DateTime      @updatedAt
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
   Cart             Carts[]
+  Reservation      Reservations[]
 }
 
 model Rooms {
-  id        Int      @id @default(autoincrement())
-  room      String   @default(dbgenerated("CONCAT('room', LPAD(FLOOR(RAND() * 10000000000), 7, '0'))"))
-  name      String   @unique @db.VarChar(50)
-  details   String   @db.VarChar(255)
-  no        String   @db.VarChar(4)
-  building  String   @db.VarChar(255)
-  location  String   @db.Text
-  roomimage String   @db.Text
-  active    Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Cart      Carts[]
+  id          Int            @id @default(autoincrement())
+  room        String         @default(dbgenerated("CONCAT('room', LPAD(FLOOR(RAND() * 10000000000), 7, '0'))"))
+  name        String         @unique @db.VarChar(50)
+  details     String         @db.VarChar(255)
+  no          String         @db.VarChar(4)
+  building    String         @db.VarChar(255)
+  location    String         @db.Text
+  roomimage   String         @db.Text
+  active      Boolean        @default(false)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  Cart        Carts[]
+  Reservation Reservations[]
   // check       check_statusRoom[]
 }
 
@@ -88,26 +90,27 @@ enum PriceType {
 }
 
 model Tools {
-  id        Int        @id @default(autoincrement())
-  tool      String     @default(dbgenerated("CONCAT('tool', LPAD(FLOOR(RAND() * 10000000000), 7, '0'))"))
-  num       String     @unique @db.Char(6)
-  name      String     @db.VarChar(50)
-  band      String     @db.VarChar(50)
-  number    Int
-  balance   Int?
-  toolimage String     @db.Text
-  toolrate  PriceType?
-  internal  Int?
-  external  Int?
-  rate      String?    @db.VarChar(50)
-  details   String?    @db.VarChar(255)
-  breakdown Int?
-  repair    Int?
-  lost      Int?
-  active    Boolean    @default(false)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  Cart      Carts[]
+  id           Int            @id @default(autoincrement())
+  tool         String         @default(dbgenerated("CONCAT('tool', LPAD(FLOOR(RAND() * 10000000000), 7, '0'))"))
+  num          String         @unique @db.Char(6)
+  name         String         @db.VarChar(50)
+  band         String         @db.VarChar(50)
+  number       Int
+  balance      Int?
+  toolimage    String         @db.Text
+  toolrate     PriceType?
+  internal     Int?
+  external     Int?
+  rate         String?        @db.VarChar(50)
+  details      String?        @db.VarChar(255)
+  breakdown    Int?
+  repair       Int?
+  lost         Int?
+  active       Boolean        @default(false)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  Cart         Carts[]
+  Reservations Reservations[]
 
   @@unique([name, band])
 }
@@ -123,5 +126,34 @@ model Carts {
 
   @@index([roomId])
   @@index([toolId])
+  @@index([userId])
+}
+
+enum StatusType {
+  WAITING
+  NOTAPPROVED
+  APPROVED
+}
+
+model Reservations {
+  id        Int        @id @default(autoincrement())
+  name      String?    @db.VarChar(50)
+  objective String?     @db.VarChar(255)
+  startdate DateTime?
+  enddate   DateTime?
+  status    StatusType @default(WAITING)
+  details   String?    @db.VarChar(255)
+  note      String?    @db.VarChar(255)
+  toolId    Int?
+  Tool      Tools?     @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  roomId    Int?
+  room      Rooms?     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  userId    Int
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([toolId])
+  @@index([roomId])
   @@index([userId])
 }
