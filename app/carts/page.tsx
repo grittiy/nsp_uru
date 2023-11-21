@@ -6,7 +6,6 @@ import { Box, Paper, Toolbar, Typography } from "@mui/material";
 import { Mali } from 'next/font/google';
 import AllCartProduct from "../components/ui/AllCartProduct";
 
-
 const prompt = Mali({
     weight: ["300", "400"],
     style: ["normal", "italic"],
