@@ -24,6 +24,7 @@ interface Tool {
   internal: number;
   external: number;
   rate: string
+  active:boolean
 }
 interface Room {
   id: number
@@ -32,6 +33,7 @@ interface Room {
   roomimage: string
   no: string
   details: string
+  active:boolean
 }
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
@@ -50,20 +52,22 @@ export default function ServicesPage() {
 
   useEffect(() => {
     // Use fetch to retrieve data from the API.
-    fetch('/api/showroom')
+    fetch('/api/rooms')
       .then((res) => res.json())
       .then((data: Room[]) => {
-        setRooms(data); // Store the fetched data in the 'rooms' state
+        const activeRooms = data.filter((room) => room.active === true);
+      setRooms(activeRooms); 
       })
       .catch((error) => {
         console.error('เกิดข้อผิดพลาดในการดึงข้อมูล:', error);
       });
 
     // Use fetch to retrieve data from the API.
-    fetch('/api/showtool')
+    fetch('/api/tools')
       .then((res) => res.json())
       .then((data: Tool[]) => {
-        setTools(data); // Store the fetched data in the 'tools' state
+        const activeTools = data.filter((tool) => tool.active === true);
+        setTools(activeTools);
       })
       .catch((error) => {
         console.error('เกิดข้อผิดพลาดในการดึงข้อมูล:', error);
