@@ -2,7 +2,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-export async function GET(req: Request) {
+export async function GET(request: Request) {
     try {
         const activeTools = await prisma.tools.findMany({
             where: {
