@@ -1,8 +1,9 @@
 
-import ImageGallery from '@/app/room/ImageGallery';
+
 import { prisma } from '@/lib/prisma'
 import React from 'react'
 import Info from '../Info';
+import ImageGallery from '../ImageGallery';
 
 type Props = {}
 

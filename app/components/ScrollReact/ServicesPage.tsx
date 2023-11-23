@@ -50,7 +50,7 @@ export default function ServicesPage() {
 
   useEffect(() => {
     // Use fetch to retrieve data from the API.
-    fetch('/api/rooms')
+    fetch('/api/showroom')
       .then((res) => res.json())
       .then((data: Room[]) => {
         setRooms(data); // Store the fetched data in the 'rooms' state
@@ -60,7 +60,7 @@ export default function ServicesPage() {
       });
 
     // Use fetch to retrieve data from the API.
-    fetch('/api/tools')
+    fetch('/api/showtool')
       .then((res) => res.json())
       .then((data: Tool[]) => {
         setTools(data); // Store the fetched data in the 'tools' state

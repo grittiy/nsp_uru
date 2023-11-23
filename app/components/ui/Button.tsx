@@ -17,7 +17,7 @@ const Button = (props: Props) => {
     
    if (session?.user) {
     const id = session?.user.id
-    router.push(`/Booking?roomId=${props.roomId}&userId=${props.userId}&toolId=${props.toolId}`); // Update with the actual route
+    router.push('/Booking'); // Update with the actual route
    } else {
     router.push('/login');
    }

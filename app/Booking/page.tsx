@@ -4,6 +4,7 @@ import { authOptions } from '../api/auth/[...nextauth]/route'
 import { Mali } from 'next/font/google';
 import { Box, Paper, Toolbar, Typography } from '@mui/material';
 import DataUser from '../components/ui/DataUser';
+import ShowdataBooking from '../components/ui/ShowdataBooking';
 
 const prompt = Mali({
     weight: ["300", "400"],
@@ -15,6 +16,7 @@ type Props = {}
 
 const BookingPage = async (props: Props) => {
     const session = await getServerSession(authOptions)
+  
     return (
         <main className="mx-auto container">
             <title>สรุปการจองห้องและยืมคืนอุปกรณ์ | NSP URU</title>
@@ -38,6 +40,9 @@ const BookingPage = async (props: Props) => {
                     </Typography>
                     <Box paddingLeft={5} paddingTop={5}>
                         <DataUser userId={session?.user?.id}/>
+                    </Box>
+                    <Box paddingLeft={5} paddingTop={5}>
+                       <ShowdataBooking userId={session?.user?.id} roomId={null} toolId={null}/>
                     </Box>
                 </Box>
             </Paper>
