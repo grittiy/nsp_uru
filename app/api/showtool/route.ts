@@ -1,11 +1,17 @@
-import { prisma } from "@/lib/prisma"
-import { NextResponse } from "next/server"
+// pages/api/showtool.ts
+import { prisma } from "@/lib/prisma";
+import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
-    const activeRooms = await prisma.tools.findMany({
-        where: {
-            active: true,
-        },
-    });
-    return NextResponse.json(activeRooms)
+    try {
+        const activeTools = await prisma.tools.findMany({
+            where: {
+                active: true,
+            },
+        });
+        return NextResponse.json(activeTools);
+    } catch (error) {
+        console.error('Prisma Client Error:', error);
+        throw error; // rethrow the error to let Next.js handle it
+    }
 }
