@@ -1,4 +1,4 @@
-// pages/api/showroom.ts
+
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
