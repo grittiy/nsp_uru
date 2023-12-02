@@ -26,14 +26,9 @@ export default function RootLayout({
 
     <html lang="en">
       <body className={mail.className}>
-
         <Providers> 
         <MyAppBar/>
-       
-{/* <MyAppBar/> */}
           {children}
-         
-          
         </Providers>
       </body>
     </html>

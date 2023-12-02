@@ -16,7 +16,7 @@ type Props = {}
 
 const BookingPage = async (props: Props) => {
     const session = await getServerSession(authOptions)
-  
+
     return (
         <main className="mx-auto container">
             <title>สรุปการจองห้องและยืมคืนอุปกรณ์ | NSP URU</title>
@@ -38,12 +38,14 @@ const BookingPage = async (props: Props) => {
                     >
                         สรุปการจองห้องและยืมคืนอุปกรณ์
                     </Typography>
-                    <Box paddingLeft={5} paddingTop={5}>
-                        <DataUser userId={session?.user?.id}/>
-                    </Box>
-                    <Box paddingLeft={5} paddingTop={5}>
-                       <ShowdataBooking userId={session?.user?.id} roomId={null} toolId={null}/>
-                    </Box>
+                    <div className='mx-auto container'>
+                        <Box paddingTop={5}>
+                            <DataUser userId={session?.user?.id} />
+                        </Box>
+                        <Box paddingTop={5}>
+                            <ShowdataBooking userId={session?.user?.id} roomId={null} toolId={null} />
+                        </Box>
+                    </div>
                 </Box>
             </Paper>
         </main>
