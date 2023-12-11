@@ -137,10 +137,10 @@ enum StatusType {
 
 model Reservations {
   id        Int        @id @default(autoincrement())
-  name      String?    @db.VarChar(50)
-  objective String?     @db.VarChar(255)
-  startdate DateTime?
-  enddate   DateTime?
+  name      String    @db.VarChar(50)
+  objective String     @db.VarChar(255)
+  startdate DateTime
+  enddate   DateTime
   status    StatusType @default(WAITING)
   details   String?    @db.VarChar(255)
   note      String?    @db.VarChar(255)

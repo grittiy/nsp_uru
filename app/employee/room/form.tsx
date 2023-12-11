@@ -11,11 +11,11 @@ type Props = {}
 interface Room {
     id: number;
     name: string;
-    room:string
-    no:string
-    building:string
-    roomimage:string
-    
+    room: string
+    no: string
+    building: string
+    roomimage: string
+
 }
 
 export const AddroomForm = (props: Props) => {
@@ -75,18 +75,18 @@ export const AddroomForm = (props: Props) => {
             roomimage: imageUrls.toString()
         }))
     }, [imageUrls])
-    
+
     const resetForm = () => {
         setFormData({
-          name: "",
-          details: "",
-          no: "",
-          building: "",
-          location: "",
-          roomimage: ""
+            name: "",
+            details: "",
+            no: "",
+            building: "",
+            location: "",
+            roomimage: ""
         });
         setImageUrls([]);
-      };
+    };
 
     const postData = async () => {
         handleImageChange()
@@ -121,7 +121,7 @@ export const AddroomForm = (props: Props) => {
                 alertMessage = 'กรุณาอัพโหลดรูปภาพ';
                 break;
         }
-    
+
         if (alertMessage) {
             alert(alertMessage);
             return;
@@ -129,11 +129,10 @@ export const AddroomForm = (props: Props) => {
 
         const isDuplicate = await isNameDuplicated();
         if (isDuplicate) {
-          alert('พบชื่อซ้ำกับในฐานข้อมูล กรุณากรอกใหม่อีกครั้ง');
-          return;
+            alert('พบชื่อซ้ำกับในฐานข้อมูล กรุณากรอกใหม่อีกครั้ง');
+            return;
         }
 
-    
         try {
             const response = await axios.post('/api/rooms', formData)
             router.push('/employee/room')
@@ -231,7 +230,7 @@ export const AddroomForm = (props: Props) => {
                                     บันทึก
                                 </button>
                             </div>
-                        
+
                         </div>
                     </div>
                 </div>

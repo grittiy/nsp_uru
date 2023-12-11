@@ -1,6 +1,11 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+export async function GET(req: Request)  {
+    const booking = await prisma.reservations.findMany({})
+    return NextResponse.json(booking)
+}
+
 export async function POST(request: Request) {
     const body = await request.json();
     const { name, objective, startdate, enddate, status, details, note, toolId, roomId, userId } = body;
@@ -13,6 +18,12 @@ export async function POST(request: Request) {
                 where: {
                     roomId,
                     userId,
+                    AND: [
+                        {
+                            startdate: { lte: enddate },
+                            enddate: { gte: startdate },
+                        },
+                    ]
                 },
             });
 
@@ -34,6 +45,12 @@ export async function POST(request: Request) {
                 where: {
                     toolId,
                     userId,
+                    AND: [
+                        {
+                            startdate: { lte: enddate },
+                            enddate: { gte: startdate },
+                        },
+                    ]
                 },
             });
 
@@ -63,7 +80,7 @@ export async function POST(request: Request) {
                 where: {
                     userId,
                     roomId: reservation.roomId, // or toolId depending on the case
-                    toolId: reservation.toolId, 
+                    toolId: reservation.toolId,
                 },
             });
 
