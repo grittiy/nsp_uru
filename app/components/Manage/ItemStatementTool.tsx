@@ -11,8 +11,8 @@ import thLocale from 'date-fns/locale/th';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import HistoryDialogs from '../pop-up/historydialog';
-import BookingRoom from '../History/BookingRoom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import BookingTool from '../History/BookingTool';
 
 const prompt = Mali({
     weight: ["300", "400"],
@@ -30,7 +30,7 @@ interface Booking {
     status: string
 }
 
-export default function ItemStatementRoom() {
+export default function ItemStatementTool() {
     const { data: session } = useSession()
     const [rows, setRows] = useState<Booking[]>([]);
     const [allrows, setAllRows] = useState<Booking[]>([]);
@@ -69,11 +69,11 @@ export default function ItemStatementRoom() {
         // Use fetch to retrieve data from the API with date filtering
         fetch(`/api/reservations?startDate=${twoDaysAgo.toISOString()}`)
             .then((res) => res.json())
-            .then((Bookingrooms: Booking[]) => {
+            .then((Bookingtools: Booking[]) => {
                 // Filter out future reservations
-                const filteredRows = Bookingrooms.filter((row) => {
+                const filteredRows = Bookingtools.filter((row) => {
                     const endDate = new Date(row.enddate);
-                    return endDate >= twoDaysAgo && row.roomId !== null && row.toolId === null;
+                    return endDate >= twoDaysAgo && row.toolId !== null && row.roomId === null;
                 });
 
                 setRows(filteredRows);
@@ -154,11 +154,11 @@ export default function ItemStatementRoom() {
         //Fetch new data from the API and update the table
         fetch('/api/reservations')
             .then((res) => res.json())
-            .then((Bookingrooms: Booking[]) => {
+            .then((Bookingtools: Booking[]) => {
                 // Filter out future reservations
-                const filteredRows = Bookingrooms.filter((row) => {
+                const filteredRows = Bookingtools.filter((row) => {
                     const endDate = new Date(row.enddate);
-                    return endDate >= twoDaysAgo && row.roomId !== null && row.toolId === null;
+                    return endDate >= twoDaysAgo && row.toolId !== null && row.roomId === null;
                 });
 
                 setRows(filteredRows);
@@ -194,7 +194,7 @@ export default function ItemStatementRoom() {
                                         type="text"
                                         fullWidth
                                         sx={{ fontFamily: prompt.style.fontFamily }}
-                                        placeholder="ค้นหาข้อมูลการจองห้องด้วยชื่อโครงการ"
+                                        placeholder="ค้นหาข้อมูลการการยืม-คืนเครื่องมือด้วยชื่อโครงการ"
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                         startAdornment={
@@ -224,10 +224,10 @@ export default function ItemStatementRoom() {
                                                                 >
                                                                     {column.name}
                                                                 </TableCell>
-                                                            ))}
+                                                            ))}                                                         
                                                             <TableCell align="right">
-                                                                <HistoryDialogs title='ประวัติการจองห้อง' >
-                                                                    <BookingRoom />
+                                                                <HistoryDialogs title='ประวัติการยืม-คืนเครื่องมือ' >
+                                                                    <BookingTool />
                                                                 </HistoryDialogs>
                                                             </TableCell>
                                                         </TableRow>

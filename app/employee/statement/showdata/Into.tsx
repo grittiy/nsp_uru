@@ -160,7 +160,7 @@ const Info: React.FC<InfoProps> = ({ id, name, objective, startdate, enddate, de
                 ))}
                 {filteredCartTools.map((bookingTool) => (
                     <Paper key={bookingTool?.id}>
-                        <Grid key={bookingTool?.id}>
+                        <Grid container spacing={2}>
                             <Grid item xs={12} sm={4}>
                                 <div className='p-5'>
                                     <Typography sx={{ fontFamily: prompt.style.fontFamily, fontSize: 16, fontWeight: 'bold' }} variant="body2" gutterBottom>

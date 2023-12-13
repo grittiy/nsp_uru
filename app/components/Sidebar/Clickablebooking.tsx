@@ -10,7 +10,7 @@ const prompt = Mali({
 });
 
 const chipbar = [{ id: 1, title: "การจองห้อง", link: "/employee/statement" },
-{ id: 2, title: "การยืม-คืนเครื่องมือ", link: "/employee/statement" }
+{ id: 2, title: "การยืม-คืนเครื่องมือ", link: "/employee/statement/BookingTool" }
 ]
 
 export default function Clickablebooking() {

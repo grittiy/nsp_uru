@@ -108,7 +108,15 @@ const EditBooking: React.FC<EditProps> = ({ id, name, objective, details, note, 
         })
         const data = await response.json();
         console.log(data);
-        router.push('/employee/statement')
+
+        if (data.roomId !== null && data.toolId === null) {
+                    router.push('/employee/statement');
+        } else if (data.toolId !== null && data.roomId === null) {
+                  router.push('/employee/statement/BookingTool');
+        } else {
+              router.push('/employee/statement');
+        }
+        
       } catch (error) {
         console.error('Error fetching data:', error);
       }
