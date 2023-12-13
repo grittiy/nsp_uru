@@ -12,6 +12,8 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import HistoryDialogs from '../pop-up/historydialog';
 import BookingRoom from '../History/BookingRoom';
+import ShowDialogs from '../pop-up/showdialog';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const prompt = Mali({
     weight: ["300", "400"],
@@ -85,14 +87,14 @@ export default function ItemStatementRoom() {
 
     useEffect(() => {
         searchData(searchQuery);
-         // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchQuery]);
 
     const searchData = (searchQuery: string) => {
         if (searchQuery) {
-            const filterData = allrows.filter((booking) => 
-            (booking.name && booking.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
-            (booking.id && booking.id.toString().includes(searchQuery))
+            const filterData = allrows.filter((booking) =>
+                (booking.name && booking.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+                (booking.id && booking.id.toString().includes(searchQuery))
             )
             setRows(filterData)
         } else {
@@ -130,21 +132,21 @@ export default function ItemStatementRoom() {
 
     const deleteRow = (idToDelete: number, currentPage: number) => {
         axios
-        .delete(`/api/reservations/${idToDelete}`)
-        .then((response) => {
-            showSnackbar('Data deleted!', 'success');
+            .delete(`/api/reservations/${idToDelete}`)
+            .then((response) => {
+                showSnackbar('Data deleted!', 'success');
 
-            if (rows.length === 1 && currentPage > 0) {
-                handlechangepage(null, currentPage - 1);
-            } else {
-                // Reset the table
-                resetTable();
-            }
-        })
-        .catch((error) => {
-            console.error('Error deleting data:', error);
-            showSnackbar('Error deleting data', 'error');
-        });
+                if (rows.length === 1 && currentPage > 0) {
+                    handlechangepage(null, currentPage - 1);
+                } else {
+                    // Reset the table
+                    resetTable();
+                }
+            })
+            .catch((error) => {
+                console.error('Error deleting data:', error);
+                showSnackbar('Error deleting data', 'error');
+            });
     }
 
     const resetTable = () => {
@@ -152,21 +154,21 @@ export default function ItemStatementRoom() {
         twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
         //Fetch new data from the API and update the table
         fetch('/api/reservations')
-        .then((res) => res.json())
-        .then((Bookingrooms: Booking[]) => {
-            // Filter out future reservations
-            const filteredRows = Bookingrooms.filter((row) => {
-                const endDate = new Date(row.enddate);
-                return endDate >= twoDaysAgo && row.roomId !== null && row.toolId === null;
-            });
+            .then((res) => res.json())
+            .then((Bookingrooms: Booking[]) => {
+                // Filter out future reservations
+                const filteredRows = Bookingrooms.filter((row) => {
+                    const endDate = new Date(row.enddate);
+                    return endDate >= twoDaysAgo && row.roomId !== null && row.toolId === null;
+                });
 
-            setRows(filteredRows);
-            setAllRows(filteredRows);
-        })
-        .catch((error) => {
-            console.error('Error fetching data:', error);
-        });
-};
+                setRows(filteredRows);
+                setAllRows(filteredRows);
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    };
 
     return (
         <>
@@ -186,21 +188,21 @@ export default function ItemStatementRoom() {
             <div className='flex'>
                 <React.Fragment>
                     <Grid container spacing={2}>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} sm={12}>
                             <Paper sx={{ width: '100%', marginLeft: '15' }}>
                                 <Box sx={{ paddingLeft: 10, paddingRight: 10, paddingTop: 2 }}>
-                                    <Input 
-                                    type="text"
-                                    fullWidth
-                                    sx={{ fontFamily: prompt.style.fontFamily }}
-                                    placeholder="ค้นหาข้อมูลการจองห้องด้วยชื่อโครงการ"
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    startAdornment={
-                                        <InputAdornment position="start">
-                                            <TroubleshootIcon />
-                                        </InputAdornment>
-                                    }
+                                    <Input
+                                        type="text"
+                                        fullWidth
+                                        sx={{ fontFamily: prompt.style.fontFamily }}
+                                        placeholder="ค้นหาข้อมูลการจองห้องด้วยชื่อโครงการ"
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        startAdornment={
+                                            <InputAdornment position="start">
+                                                <TroubleshootIcon />
+                                            </InputAdornment>
+                                        }
                                     />
                                 </Box>
                                 <br />
@@ -223,12 +225,13 @@ export default function ItemStatementRoom() {
                                                                 >
                                                                     {column.name}
                                                                 </TableCell>
-                                                            ))}  
-                                                            <TableCell>
-                                                                <HistoryDialogs title='ประวัติการจองห้อง'>
-                                                                    <BookingRoom/>
+                                                            ))}
+                                                            <TableCell/>
+                                                            <TableCell align="right">
+                                                                <HistoryDialogs title='ประวัติการจองห้อง' >
+                                                                    <BookingRoom />
                                                                 </HistoryDialogs>
-                                                            </TableCell>                                                          
+                                                            </TableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
@@ -263,21 +266,21 @@ export default function ItemStatementRoom() {
                                                                                         switch (value) {
                                                                                             case 'WAITING':
                                                                                                 statusText = 'รอการตรวจสอบ'
-                                                                                                statusColor = '#606269'; 
+                                                                                                statusColor = '#606269';
                                                                                                 break;
                                                                                             case 'NOTAPPROVED':
                                                                                                 statusText = 'ไม่อนุมัติ';
-                                                                                                statusColor = '#f50057'; 
+                                                                                                statusColor = '#f50057';
                                                                                                 break;
                                                                                             case 'APPROVED':
                                                                                                 statusText = 'อนุมัติ';
-                                                                                                statusColor = '#4caf50'; 
+                                                                                                statusColor = '#4caf50';
                                                                                                 break;
                                                                                             default:
                                                                                                 statusText = 'N/A';
-                                                                                                statusColor = ''; 
-                                                                                            }
-                                                                                            
+                                                                                                statusColor = '';
+                                                                                        }
+
 
                                                                                         return (
                                                                                             <TableCell
@@ -287,7 +290,7 @@ export default function ItemStatementRoom() {
                                                                                                     color: statusColor
                                                                                                 }}
                                                                                             >
-                                                                                                 {statusText}
+                                                                                                {statusText}
                                                                                             </TableCell>
                                                                                         );
                                                                                     }
@@ -324,19 +327,27 @@ export default function ItemStatementRoom() {
                                                                                             horizontal: 'right',
                                                                                         }}
                                                                                         open={Boolean(rowAnchorEl)}
-                                                                                        onClose={() => handleClose(index)}
-                                                                                    >
+                                                                                        onClose={() => handleClose(index)}>  
                                                                                         <MenuItem>
-                                                                                            <Button href={`/employee/statement/edit/${row.id}`} startIcon={<ModeEditIcon />} sx={{ fontFamily: prompt.style.fontFamily }}>แก้ไข</Button>                                                                                        
+                                                                                            <Button  color="success" href={`/employee/statement/showdata/${row.id}`} startIcon={<VisibilityIcon />} sx={{ fontFamily: prompt.style.fontFamily }}>แสดงข้อมูล</Button>
                                                                                         </MenuItem>
-                                                                                        <MenuItem onClick={() => handleClose(index)}>                                                                                           
+                                                                                        <MenuItem>
+                                                                                            <Button href={`/employee/statement/edit/${row.id}`} startIcon={<ModeEditIcon />} sx={{ fontFamily: prompt.style.fontFamily }}>แก้ไข</Button>
+                                                                                        </MenuItem>
+                                                                                      
+                                                                                        <MenuItem onClick={() => handleClose(index)}>
                                                                                             <Button startIcon={<DeleteIcon />}
-                                                                                            color="error"
-                                                                                            onClick={() => handleDelete(row.id, page)}
-                                                                                            sx={{ fontFamily: prompt.style.fontFamily }}>ลบ</Button>
+                                                                                                color="error"
+                                                                                                onClick={() => handleDelete(row.id, page)}
+                                                                                                sx={{ fontFamily: prompt.style.fontFamily }}>ลบ</Button>
                                                                                         </MenuItem>
                                                                                     </Menu>
                                                                                 </div>
+                                                                            </TableCell>
+                                                                            <TableCell key={index} align="right">
+                                                                                <ShowDialogs title='เพิ่มการตรวจสอบ'>
+                                                                                    {/* <BookingId  data={rows}/> */}fff
+                                                                                </ShowDialogs>
                                                                             </TableCell>
                                                                         </TableRow>
                                                                     )

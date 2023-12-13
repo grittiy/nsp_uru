@@ -1,7 +1,6 @@
 import React from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import Allpurchased from "../components/ui/Allpurchased";
 import { Box, Paper, Toolbar, Typography } from "@mui/material";
 import { Mali } from 'next/font/google';
 import AllCartProduct from "../components/ui/AllCartProduct";
@@ -40,9 +39,6 @@ const Carts = async (props: Props) => {
                     <div className="max-w-[1280px] mx-auto px-5">
                         <AllCartProduct userId={session?.user?.id} roomId={null} toolId={null} />
                       
-
-                        <hr className="mt-10 mb-10" />
-                        {/* <Allpurchased userId={session?.user?.id} /> */}
                     </div>
                 </Box>
             </Paper>
