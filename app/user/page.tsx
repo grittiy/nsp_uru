@@ -1,30 +1,42 @@
+import React from 'react'
+import { Mali } from 'next/font/google';
+import { Box, Paper, Typography } from '@mui/material';
 
-import { useEffect, useState } from "react";
-import Layout from "../layout";
-import dynamic from "next/dynamic";
-
-import LineoaPage from "../components/ScrollReact/LineoaPage";
-import CalendarPage from "../components/ScrollReact/CalendarPage";
-import ServicesPage from "../components/ScrollReact/ServicesPage";
-import MyAppBar from "../components/ui/alert/HeaderBar";
+const prompt = Mali({
+  weight: ["300", "400"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+});
 
 
-const StaffPage: React.FC = () => {
-  // const [isClient, setIsClient] = useState(false)
-  // useEffect(() => {
-  //   setIsClient(true)
-  // }, [isClient,setIsClient])
+export default function page() {
   return (
-    <>
-   {/* <MyAppBar/> */}
-   {/* <Layout userRole="USER"> */}
-
-      {/* <div>{isClient ? 'This is never prerendered' : 'Prerendered'}</div> */}
-      <div> หน้าเจ้าหน้าที่</div>
-      {/* </Layout> */}
-    </>
-   
-  );
-};
-
-export default StaffPage;
+    <main className="mx-auto container">
+      <title>คำร้องขอใช้บริการ | NSP URU</title>
+      <Paper elevation={6} sx={{ borderRadius: '1Paper6px' }}>
+        <Box
+          sx={{
+            p: 2,
+            width: 'auto',
+            border: 5,
+            borderColor: "#3182cde6",
+            borderRadius: '16px',
+            flexGrow: 2
+          }}
+        >
+          <Typography
+            gutterBottom variant="h5" component="div"
+            sx={{ fontFamily: prompt.style.fontFamily, paddingLeft: 5 }}
+          >
+            คำร้องขอใช้บริการ
+          </Typography>
+          <div>
+            <div className="p-4">
+              ff
+            </div>
+          </div>
+        </Box>
+      </Paper>
+    </main>
+  )
+}

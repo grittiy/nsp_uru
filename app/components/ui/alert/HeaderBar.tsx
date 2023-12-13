@@ -955,14 +955,6 @@ function UserAppBar() {
                       </Button>
                     )}
                   </MenuItem>
-                  <MenuItem onClick={handleCloseUserMenu} component={Link} href="/carts">
-                    <ListItemIcon>
-                      <Badge color="success" badgeContent={badgeContent}>
-                        <ShoppingBasketIcon color="success" />
-                      </Badge>
-                    </ListItemIcon>
-                    <Button sx={{ fontFamily: prompt.style.fontFamily, fontSize: 18, color: "#1b5e20" }} >ตะกร้า</Button>
-                  </MenuItem>
                   <MenuItem onClick={handleCloseUserMenu}>
                     <ListItemIcon>
                       <LogoutIcon color="success" />

@@ -23,8 +23,10 @@ const DataUser = async (props: Props) => {
             id: props.userId
         }
     })
+
     const allData = await Promise.all(allDatauser)
     const userId = allDatauser.map((item) => item.id).filter((id) => id !== null)[0] as number | undefined;
+    
     if (allData.length === 0) {
         return (
             <div className='relative flex items-center justify-center'>
@@ -35,8 +37,7 @@ const DataUser = async (props: Props) => {
     const filteredData = allData.filter(allData => allData !== null && allData?.id !== null);
 
     if (filteredData.some(data => data.fname === null || data.phone === null)) {
-        window.alert('กรุณากรอกข้อมูลส่วนตัวของคุณ');
-        // Redirect to the profile page or any other desired page
+      
         return (
             <Link href={`/Profile/${userId}`}>
 

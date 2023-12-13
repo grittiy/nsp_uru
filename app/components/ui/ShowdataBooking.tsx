@@ -43,17 +43,18 @@ const ShowdataBooking = (props: Props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${API_ENDPOINT}?userId=${props.userId}`);
-                const data = await response.json();
-
-                setAllCartProduct(data);
+                if (session) {
+                    const response = await fetch(`${API_ENDPOINT}?userId=${session.user.id}`);
+                    const data = await response.json();
+    console.log("session",session)
+                    setAllCartProduct(data);
+                }
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
-        };
-
+        };    
         fetchData();
-    }, [props.userId]);
+    }, [session]);
 
     const handleRequestService = () => {
         if (session?.user?.role === 'USER') {
