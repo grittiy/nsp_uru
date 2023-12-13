@@ -2,6 +2,7 @@ import React from 'react'
 import { Mali } from 'next/font/google';
 import { Box, Paper, Typography } from '@mui/material';
 import ItemStatementRoom from '@/app/components/Manage/ItemStatementRoom';
+import Clickablebooking from '@/app/components/Sidebar/Clickablebooking';
 
 const prompt = Mali({
   weight: ["300", "400"],
@@ -13,6 +14,7 @@ export default function page() {
   return (
     <main className="mx-auto container">
       <title>รายงานการจองห้อง | NSP URU</title>
+      <Clickablebooking />
       <Paper elevation={6} sx={{ borderRadius: '16px' }}>
         <Box
           sx={{

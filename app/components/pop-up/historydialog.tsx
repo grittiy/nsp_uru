@@ -11,7 +11,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { Mali } from 'next/font/google';
 import { SpeedDial } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import HistoryIcon from '@mui/icons-material/History';
 
 const prompt = Mali({
     weight: ["300", "400"],
@@ -28,7 +28,13 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     },
 }));
 
-export default function CustomizedDialogs({ children, title }: { children: React.ReactNode, title: string }) {
+interface HistoryDialogsProps {
+    title: string;
+    children?: React.ReactNode;
+}
+
+
+export default function HistoryDialogs({ children, title }: HistoryDialogsProps) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -40,11 +46,10 @@ export default function CustomizedDialogs({ children, title }: { children: React
 
     return (
         <div>
-            <SpeedDial ariaLabel="SpeedDial basic example"
+            <Button
                 onClick={handleClickOpen}
-                icon={<AddIcon sx={{ color: '#3182cde6' }} />}
-            >
-            </SpeedDial>
+                startIcon={<HistoryIcon  sx={{ color: '#1b5e20' }}/>}
+            />
             <BootstrapDialog
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
