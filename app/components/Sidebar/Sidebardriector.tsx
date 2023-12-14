@@ -13,7 +13,7 @@ const prompt = Mali({
   });
 
 const Sidebar = [{ title: "รายงาน", Link: "/driector" },
-{ title: "คำร้องขอใช้บริการ", Link: "/driector" }
+{ title: "คำร้องขอใช้บริการ", Link: "/driector/Servicerequest" }
 ]
 
 const drawerWidth = 240;

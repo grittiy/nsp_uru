@@ -62,6 +62,7 @@ model User {
   updatedAt        DateTime       @updatedAt
   Cart             Carts[]
   Reservation      Reservations[]
+  Check            Checks[]
 }
 
 model Rooms {
@@ -78,7 +79,7 @@ model Rooms {
   updatedAt   DateTime       @updatedAt
   Cart        Carts[]
   Reservation Reservations[]
-  // check       check_statusRoom[]
+  Checks      Checks[]
 }
 
 enum PriceType {
@@ -111,6 +112,7 @@ model Tools {
   updatedAt    DateTime       @updatedAt
   Cart         Carts[]
   Reservations Reservations[]
+  Checks       Checks[]
 
   @@unique([name, band])
 }
@@ -137,7 +139,7 @@ enum StatusType {
 
 model Reservations {
   id        Int        @id @default(autoincrement())
-  name      String    @db.VarChar(50)
+  name      String     @db.VarChar(50)
   objective String     @db.VarChar(255)
   startdate DateTime
   enddate   DateTime
@@ -152,8 +154,37 @@ model Reservations {
   user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+  Checks    Checks[]
 
   @@index([toolId])
   @@index([roomId])
   @@index([userId])
+}
+
+enum StatusCheckType {
+  WAITING
+  NOTCHECKED
+  CHECKED
+}
+
+model Checks {
+  id          Int             @id @default(autoincrement())
+  status      StatusCheckType @default(NOTCHECKED)
+  toolId      Int?
+  Tool        Tools?          @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  roomId      Int?
+  room        Rooms?          @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  bookingId   Int
+  Reservation Reservations    @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  details     String?         @db.VarChar(255)
+  check       String?         @db.VarChar(20)
+  userId      Int?
+  user        User?           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@index([toolId])
+  @@index([roomId])
+  @@index([userId])
+  @@index([bookingId])
 }

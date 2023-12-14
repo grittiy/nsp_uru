@@ -96,7 +96,7 @@ const drawerE = [
 const menuDirector = [{ title: "LINE OA", Link: "https://line.me/ti/p/~776cnnvc" },
 { title: "ปฏิทิน", Link: "/Line_OA" },
 { title: "บริการต่างๆ", Link: "/Services" },
-{ title: "รายการ", Link: "./director" },
+{ title: "รายการ", Link: "/driector" },
 ]
 
 const imageStyle = {
