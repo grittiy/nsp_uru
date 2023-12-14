@@ -84,7 +84,6 @@ const Info: React.FC<InfoProps> = ({ id, name, objective, startdate, enddate, de
     return (
         <React.Fragment>
             <div>
-
                 {filteredCartRooms.map((bookingRoom) => (
                     <Paper key={bookingRoom?.id}>
                         <Grid container spacing={2}>

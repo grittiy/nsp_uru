@@ -18,7 +18,7 @@ const Sidebar = [{ title: "รายงาน", Link: "/driector" },
 
 const drawerWidth = 240;
 
-export default function Sidebaruser() {
+export default function Sidebardriector() {
     return (
         <div >
             <Box

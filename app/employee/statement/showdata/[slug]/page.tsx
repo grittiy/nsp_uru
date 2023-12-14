@@ -10,7 +10,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     const bookingId = parseInt(params.slug, 10);
 
     if (isNaN(bookingId)) {
-        return <div>Error: Invalid bookingId ID</div>;
+        return <div>Error: Invalid booking ID</div>;
     }
 
     const booking = await prisma.reservations.findUnique({
