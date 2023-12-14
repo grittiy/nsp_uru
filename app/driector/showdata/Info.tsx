@@ -12,32 +12,6 @@ const prompt = Mali({
     subsets: ["latin"],
 });
 
-enum UserRole {
-    Admin = "ADMIN",
-    Director = "DIRECTOR",
-    Employee = "EMPLOYEE",
-    User = "USER"
-}
-
-enum PersonType {
-    Null = "NULL",
-    Internal = "INTERNAL",
-    External = "EXTERNAL"
-}
-
-enum InternalType {
-    Null = "NULL",
-    Lecturer = "LECTURER",
-    Student = "STUDENT",
-    Staff = "STAFF"
-}
-
-enum ExternalType {
-    Null = "NULL",
-    Government = "GOVERNMENT",
-    Private = "PRIVATE"
-}
-
 interface InfoProps {
     id: number
     usr: string
@@ -128,7 +102,7 @@ const Info: React.FC<InfoProps> = ({ id, name, email, avatar, pname, fname, sex,
                                         <Typography sx={{ fontFamily: prompt.style.fontFamily, fontSize: 16 }} variant="body2" gutterBottom>
                                             ประเภทบุคลากร: {type === 'INTERNAL' ? (
                                                 <>
-                                                    บุคคลากรภายใน [ {internalType === 'LECTURER' ? 'อาจารย์' : internalType === 'STUDENT' ? 'นักศึกษา' : internalType === 'STAFF' ? 'เจ้าหน้าที่' : 'ไม่ระบุ'} ]
+                                                    บุคลากรภายใน [ {internalType === 'LECTURER' ? 'อาจารย์' : internalType === 'STUDENT' ? 'นักศึกษา' : internalType === 'STAFF' ? 'เจ้าหน้าที่' : 'ไม่ระบุ'} ]
                                                 </>
                                             ) : type === 'EXTERNAL' ? (
                                                 <>

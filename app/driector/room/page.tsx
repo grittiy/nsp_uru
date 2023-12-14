@@ -9,6 +9,7 @@ const prompt = Mali({
     style: ["normal", "italic"],
     subsets: ["latin"],
 });
+
 export default function page() {
   return (
     <main className="mx-auto container">
