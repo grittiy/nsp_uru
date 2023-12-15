@@ -3,8 +3,6 @@ import { Mali } from 'next/font/google';
 import { Box, Paper, Typography } from '@mui/material';
 import Itemrequest from '@/app/components/Manage/Itemrequest';
 
-
-
 const prompt = Mali({
     weight: ["300", "400"],
     style: ["normal", "italic"],

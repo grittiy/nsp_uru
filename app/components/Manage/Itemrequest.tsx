@@ -21,6 +21,7 @@ interface Booking {
   roomId: number
   id: number
   toolId: number
+  userId: number
   startdate: Date
   enddate: Date
   status: string
@@ -43,6 +44,7 @@ export default function Itemrequest() {
 
   const columns = [
     { id: 'id', name: 'ลำดับที่' },
+    { id: 'res', name: 'หมายเลขการยืม' },
     { id: 'name', name: 'ชื่อโครงการ' },
     { id: 'daterange', name: 'คำร้องขอใช้บริการ' },
     { id: 'status', name: 'สถานะการจอง' }
@@ -79,13 +81,16 @@ export default function Itemrequest() {
   const handleStatusChange = async (id: number, newStatus: string) => {
     try {
       const bookingToUpdate = rows.find((row) => row.id === id);
-      const { toolId, roomId } = bookingToUpdate as Booking;
-
+      const { toolId, roomId,userId, id: bookingId } = bookingToUpdate as Booking;
       await axios.patch(`/api/reservations/${id}`, { status: newStatus });
       
-      if (newStatus === 'APPROVED' && toolId && roomId) {
-        const response = await axios.post('/api/checks', { toolId, roomId, bookingId: id });
-        console.log('Response from /api/checks:', response.data);
+      if (newStatus === 'APPROVED' && ((toolId === null && roomId !== null ) || (toolId !== null && roomId === null))) {
+        await axios.post('/api/checks', {
+          toolId,
+          roomId,
+          userId,
+          bookingId
+        });
       }
 
       const updatedStatus = rows.map((row) => {

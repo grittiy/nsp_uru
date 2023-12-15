@@ -13,9 +13,9 @@ const chipbar = [{ id: 1, title: "ผู้ใช้งานระบบ", link
 { id: 2, title: "ห้อง", link: "/driector/room" },
 { id: 3, title: "เครื่องมือ", link: "/driector/tool" },
 { id: 4, title: "การจองห้อง", link: "/driector/booking" },
-{ id: 5, title: "การยืมคืนเครื่องมือ", link: "/driector/booking/tool" },
+{ id: 5, title: "การยืม-คืนเครื่องมือ", link: "/driector/booking/tool" },
 { id: 6, title: "การตรวจสอบสถานะการจองห้อง", link: "/driector/check" },
-{ id: 7, title: "การตรวจสอบสถานะการยืมคืนเครื่องมือ", link: "/driector/check/tool" }
+{ id: 7, title: "การตรวจสอบสถานะการยืม-คืนเครื่องมือ", link: "/driector/check/tool" }
 
 ]
 export default function Clickablestement() {

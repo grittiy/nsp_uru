@@ -44,6 +44,7 @@ export default function ItemStatementRoom() {
 
     const columns = [
         { id: 'id', name: 'ลำดับที่' },
+        { id: 'res', name: 'หมายเลขการจอง' },
         { id: 'name', name: 'ชื่อโครงการ' },
         { id: 'daterange', name: 'คำร้องขอใช้บริการ' },
         { id: 'status', name: 'สถานะการจอง' }

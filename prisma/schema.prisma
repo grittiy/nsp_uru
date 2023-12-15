@@ -139,6 +139,7 @@ enum StatusType {
 
 model Reservations {
   id        Int        @id @default(autoincrement())
+  res       String     @default(dbgenerated("CONCAT('res', LPAD(FLOOR(RAND() * 10000000000), 7, '0'))"))
   name      String     @db.VarChar(50)
   objective String     @db.VarChar(255)
   startdate DateTime
@@ -169,6 +170,7 @@ enum StatusCheckType {
 
 model Checks {
   id          Int             @id @default(autoincrement())
+  ch         String          @default(dbgenerated("CONCAT('ch', LPAD(FLOOR(RAND() * 10000000000), 7, '0'))"))
   status      StatusCheckType @default(NOTCHECKED)
   toolId      Int?
   Tool        Tools?          @relation(fields: [toolId], references: [id], onDelete: Cascade)
@@ -177,7 +179,7 @@ model Checks {
   bookingId   Int
   Reservation Reservations    @relation(fields: [bookingId], references: [id], onDelete: Cascade)
   details     String?         @db.VarChar(255)
-  check       String?         @db.VarChar(20)
+  note        String?         @db.VarChar(20)
   userId      Int?
   user        User?           @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt   DateTime        @default(now())

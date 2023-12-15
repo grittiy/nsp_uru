@@ -9,7 +9,7 @@ export async function GET(req: Request) {
 
 export async function POST(request: Request) {
     const body = await request.json();
-    const { status, toolId, roomId, bookingId, userId, details, check } = body
+    const { status, toolId, roomId, bookingId, userId, details, note } = body
 
     try {
         let checkData;
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
                     roomId,
                     bookingId,
                     details,
-                    check,
+                    note,
                     userId
                 }
             }
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
                     toolId,
                     bookingId,
                     details,
-                    check,
+                    note,
                     userId
                 }
             }
