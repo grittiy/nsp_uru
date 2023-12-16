@@ -8,7 +8,7 @@ type Props = {
     userId: number | null
     toolId: number | null
     roomId: number | null 
-    bookingId: number | null 
+    bookingId: number
     status: string
     details: string  | null
     note: string  | null
@@ -40,7 +40,7 @@ const EditCheckRoom = async ({ params }: { params: { slug: string } }) => {
             status: check?.status ?? "",
             toolId: check?.toolId ?? null,
             roomId: check?.roomId ?? null,
-            bookingId: check?.bookingId ?? null,
+            bookingId: check?.bookingId ?? 0,
             userId: check?.userId ?? 0,
             details: check?.details ?? null,
             note: check?.note ?? null
