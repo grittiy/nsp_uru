@@ -48,7 +48,7 @@ const EditCheckRoom = async ({ params }: { params: { slug: string } }) => {
 
         return (
             <div>
-                <title>แก้ไขข้อมูลการตรวจสอบสถานะการจองห้อง | NSP URU</title>
+                <title>แก้ไขข้อมูลการตรวจสอบสถานะการจองห้องและยืม-คืนเครื่องมือ | NSP URU</title>
                 <Edit {...checkProp}/>
             </div>
         )

@@ -266,7 +266,7 @@ export default function ItemChecktRoom() {
                                                                 </TableCell>
                                                             ))}
                                                             <TableCell align="right">
-                                                                <HistoryDialogs title='ประวัติการตรวจสอบสถานะการจองห้อง' >
+                                                                <HistoryDialogs title='ประวัติการตรวจสอบสถานะการยืม-คืนเครื่องมือ' >
                                                                     <CheckTool />
                                                                 </HistoryDialogs>
                                                             </TableCell>
