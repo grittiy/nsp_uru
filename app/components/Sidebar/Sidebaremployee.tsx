@@ -19,7 +19,7 @@ const Sidebar = [{ title: "ผู้เข้าใช้ระบบ", Link: "/
 { title: "ห้อง", Link: "/employee/room" },
 { title: "เครื่องมือ", Link: "/employee/tool" },
 { title: "รายงาน", Link: "/employee/statement" },
-{ title: "การตรวจสอบสถานะ", Link: "/employee" },
+{ title: "การตรวจสอบสถานะ", Link: "/employee/checks" },
 ]
 
 const drawerWidth = 240;

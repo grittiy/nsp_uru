@@ -101,7 +101,7 @@ export default function Itemrequest() {
       });
       setRows(updatedStatus);
     } catch (error) {
-      console.error('เกิดข้อผิดพลาดในการอัปเดตสิทธิ์ผู้ใช้งานระบบ:', error);
+      console.error('เกิดข้อผิดพลาดในการอัปเดตสถานะ:', error);
     }
   };
 
