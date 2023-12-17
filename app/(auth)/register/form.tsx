@@ -8,7 +8,7 @@ import { AiFillLock } from 'react-icons/ai';
 
 
 export const RegisterForm = () => {
-    const [username, setUsername] = useState('')
+    const [name, setname] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState<string | null>(null)
@@ -19,7 +19,7 @@ export const RegisterForm = () => {
             const res = await fetch('/api/register', {
                 method: 'POST',
                 body: JSON.stringify({
-                    username,email, password
+                    name,email, password
                 }),
                 headers: {
                     'Content-Type': 'application/json'
@@ -41,11 +41,11 @@ export const RegisterForm = () => {
             <div className="bg-gray-100 p-2 flex w-full items-center mb-3">
                 <FaUserAlt className="text-gray-500 m-2" />
                 <input
-                    name="username"
+                    name="name"
                     required //reload
-                    value={username}
+                    value={name}
                     placeholder="ชื่อผู้ใช้..."
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={(e) => setname(e.target.value)}
                     id='username' type="text"
                     className="bg-gray-100 font-semibold outline-none text-sm flex-1 overflow-clip "
                 />
