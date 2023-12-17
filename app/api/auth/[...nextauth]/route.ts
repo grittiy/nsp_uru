@@ -9,8 +9,6 @@ import { hash } from "bcrypt"
 
 
 export const authOptions: NextAuthOptions = {
-
-
   session: {
     strategy: 'jwt'
   },
@@ -195,7 +193,7 @@ export const authOptions: NextAuthOptions = {
               avatar: (profile as any).picture,
             }
           })
-
+          console.log(profile)
         } catch (err) {
           console.error('LINE Login Error:', err);
           return false;
@@ -206,28 +204,10 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user, account, profile }) {
       console.log({ token, account, profile, user })
       if (user) {
-        token.id  = user.id
+        token.id = user.id
         token.role = user.role
       }
 
-      // if (profile) {
-      //   const user = await prisma.user.findUnique({
-      //     where :{
-      //       email:profile.email
-      //     }
-      //   })
-
-      //   if (!user) {
-      //     throw new Error('No user found')
-      //   }
-      //   token.id = user.id
-      //   token.reservation = {
-      //     id: user.reservationId
-      //   }
-      //   token.borrow ={
-      //     id: user.borrowId
-      //   }
-      // }
       return token
     },
     async session({ session, token, user }) {
@@ -239,8 +219,9 @@ export const authOptions: NextAuthOptions = {
         session.user.role = user.role;
       }
 
-      if(session?.user){
+      if (session?.user) {
         session.user.id = token.id;
+        console.log("session", session)
       }
       return session
     }

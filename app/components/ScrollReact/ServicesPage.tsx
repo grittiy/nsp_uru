@@ -78,7 +78,7 @@ export default function ServicesPage() {
 
   return (
     <React.Fragment>
-      <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224, flexDirection: 'column', alignItems: 'center' }}>
+      <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: "auto", flexDirection: 'column', alignItems: 'center' }}>
         <Typography align="center" sx={{ fontFamily: prompt.style.fontFamily, fontSize: 20 }}>บริการต่าง ๆ</Typography>
         <br />
         <Grid container spacing={2}>
