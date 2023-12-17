@@ -24,6 +24,7 @@ type Props = {
 const ShowdataBooking = (props: Props) => {
     const { data: session } = useSession()
     const router = useRouter();
+    const [userCartProducts, setUserCartProducts] = useState([]);
     const [allcartproduct, setAllCartProduct] = useState<any[]>([]);
     const [bookingData, setBookingData] = useState<any>(null);
     const [cartRooms, setCartRooms] = useState<any[]>([]);
@@ -39,20 +40,20 @@ const ShowdataBooking = (props: Props) => {
         setSelectedToolId(toolId);
     };
 
-      
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 if (session) {
                     const response = await fetch(`${API_ENDPOINT}?userId=${session.user.id}`);
                     const data = await response.json();
-    console.log("session",session)
+                    console.log("session", session)
                     setAllCartProduct(data);
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
-        };    
+        };
         fetchData();
     }, [session]);
 
@@ -111,7 +112,7 @@ const ShowdataBooking = (props: Props) => {
     const filteredCartTools = cartTools.filter(cartTool => cartTool !== null && cartTool?.id !== null);
 
 
-    
+
     return (
         <React.Fragment>
             <div>
@@ -203,15 +204,15 @@ const ShowdataBooking = (props: Props) => {
                         </Paper>
                     ))}
                 </Paper>
-                <br />             
-                    <Button
-                        variant="outlined"
-                        color="success"
-                        sx={{ fontFamily: prompt.style.fontFamily, marginRight: 10 }}
-                        onClick={handleRequestService}
-                    >
-                        ส่งคำร้องขอใช้บริการ
-                    </Button>
+                <br />
+                <Button
+                    variant="outlined"
+                    color="success"
+                    sx={{ fontFamily: prompt.style.fontFamily, marginRight: 10 }}
+                    onClick={handleRequestService}
+                >
+                    ส่งคำร้องขอใช้บริการ
+                </Button>
             </div>
         </React.Fragment>
     )

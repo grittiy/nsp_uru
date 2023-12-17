@@ -1,15 +1,19 @@
 import React from 'react'
 import { Mali } from 'next/font/google';
+import { getServerSession } from "next-auth";
 import { Box, Paper, Typography } from '@mui/material';
+import Allbookinguser from '../components/Manage/Allbookinguser';
+import { authOptions } from '../api/auth/[...nextauth]/route';
 
 const prompt = Mali({
   weight: ["300", "400"],
   style: ["normal", "italic"],
   subsets: ["latin"],
 });
+type Props = {}
 
-
-export default function page() {
+const Page = async (props: Props) => {
+  const session = await getServerSession(authOptions)
   return (
     <main className="mx-auto container">
       <title>คำร้องขอใช้บริการ | NSP URU</title>
@@ -32,7 +36,7 @@ export default function page() {
           </Typography>
           <div>
             <div className="p-4">
-              ff
+              <Allbookinguser userId={session?.user?.id} roomId={null} toolId={null}/>
             </div>
           </div>
         </Box>
@@ -40,3 +44,4 @@ export default function page() {
     </main>
   )
 }
+export default Page
