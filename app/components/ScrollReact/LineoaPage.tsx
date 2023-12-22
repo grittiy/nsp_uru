@@ -39,7 +39,7 @@ const LineoaPage: React.FC = () => {
                 />
                 <Stack direction="row" spacing={2} m={1} >
                   <ThemeProvider theme={theme}>
-                    <Button href="https://line.me/ti/p/~776cnnvc" variant="outlined" color="warning" size="large" sx={{ fontWeight: 700, border: 2, fontFamily: prompt.style.fontFamily, marginLeft: "10%" }}>
+                    <Button href="https://lin.ee/sFb2vq9" variant="outlined" color="warning" size="large" sx={{ fontWeight: 700, border: 2, fontFamily: prompt.style.fontFamily, marginLeft: "10%" }}>
                       LINE
                     </Button>
                   </ThemeProvider>
